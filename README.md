@@ -1,2 +1,2 @@
 # service-manager
-A web application for managing works and clients.
+A web application for managing jobs and clients.
