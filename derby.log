@@ -1,7 +1,23 @@
 ----------------------------------------------------------------
-Fri Apr 23 22:18:32 CEST 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0179-0062-4970-0000063aff18 
-on database directory memory:C:\Users\gerik\Desktop\Production\service-manager\3d9748e7-7d72-4988-9467-2a90320c200e with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Fri Apr 23 22:48:16 CEST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0179-007d-8595-000004f24430 
+on database directory memory:C:\Users\gerik\Desktop\Production\service-manager\94fb29b7-f90b-41ff-9a49-d7a7976538d6 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_281/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_271-b09
+user.dir=C:\Users\gerik\Desktop\Production\service-manager
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Fri Apr 23 22:49:18 CEST 2021:
+Shutting down instance a816c00e-0179-007d-8595-000004f24430 on database directory memory:C:\Users\gerik\Desktop\Production\service-manager\94fb29b7-f90b-41ff-9a49-d7a7976538d6 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+----------------------------------------------------------------
+Fri Apr 23 22:49:20 CEST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 176240b2-0179-007d-8595-000004f24430 
+on database directory memory:C:\Users\gerik\Desktop\Production\service-manager\06f234b0-2616-423f-8b44-5721aecc5811 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_281/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_271-b09
