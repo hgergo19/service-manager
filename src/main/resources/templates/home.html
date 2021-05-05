@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head th:include="fragments/head :: headFragment">
-	<title id="pageTitle">Home page title</title>
+		<title id="pageTitle">Home page title</title>
 	</head>
 	<body>
-		<div class="col-sm-8">
-			<button class="warning alert-light">
-				Button
-			</button>
-			<p class="danger">Teszt szöveg</p>
-		</div>
+		<div th:replace="fragments/navbar :: navbar"></div>
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+
 	</body>
+
+
+	<script>
+        $(document).ready(function () {
+            let trigger = $('.hamburger'),
+                overlay = $('.overlay'),
+                isClosed = false;
+
+            trigger.click(function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed === true) {
+                    overlay.hide();
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+                    overlay.show();
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('#wrapper').toggleClass('toggled');
+            });
+        });
+	</script>
 </html>
