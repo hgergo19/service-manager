@@ -7,6 +7,14 @@
 		<div th:replace="fragments/navbar :: navbar"></div>
 		<div th:replace="fragments/sidebar :: sidebar"></div>
 
+		<div class="card closed  " style="width: 18rem; ">
+			<div class="card-body">
+				<h5 class="card-title">Új munka</h5>
+				<p class="card-text">Valam példaszöveg.</p>
+				<a href="#" class="btn btn-primary">Új munka megnyitása</a>
+			</div>
+		</div>
+
 
 	</body>
 
@@ -14,6 +22,7 @@
 	<script>
         $(document).ready(function () {
             let trigger = $('.hamburger'),
+                card = $('.card'),
                 overlay = $('.overlay'),
                 isClosed = false;
 
@@ -25,11 +34,15 @@
 
                 if (isClosed === true) {
                     overlay.hide();
+                    card.removeClass('is-open');
+                    card.addClass('is-closed');
                     trigger.removeClass('is-open');
                     trigger.addClass('is-closed');
                     isClosed = false;
                 } else {
                     overlay.show();
+                    card.removeClass('is-closed');
+                    card.addClass('is-open');
                     trigger.removeClass('is-closed');
                     trigger.addClass('is-open');
                     isClosed = true;
