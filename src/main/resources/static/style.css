@@ -31,6 +31,7 @@ html {
 	padding-left : 220px;
 	}
 
+
 #sidebar-wrapper {
 	z-index            : 1000;
 	left               : 220px;
@@ -44,7 +45,7 @@ html {
 	-moz-transition    : all 0.5s ease;
 	-o-transition      : all 0.5s ease;
 	transition         : all 0.5s ease;
-	margin-top         : 50px;
+	margin-top         : 100px;
 	}
 
 #sidebar-wrapper::-webkit-scrollbar {
@@ -207,68 +208,68 @@ html {
 
 /*Fontawesome icons*/
 .nav.sidebar-nav li a::before {
-	font-family    : fontawesome;
-	content        : "\f12e";
+	font-family    : fontawesome, sans-serif;
+	/*content        : "\f12e";*/
 	vertical-align : baseline;
 	display        : inline-block;
 	padding-right  : 5px;
 	}
 
-a[href*="#home"]::before {
-	content : "\f015" !important;
-	}
+/*a[href*="#home"]::before {*/
+/*	content : "\f015" !important;*/
+/*	}*/
 
 a[href*="#about"]::before {
-	content : "\f129" !important;
+	/*content : "\f129" !important;*/
 	}
 
 a[href*="#events"]::before {
-	content : "\f073" !important;
+	/*content : "\f073" !important;*/
 	}
 
 a[href*="#events"]::before {
-	content : "\f073" !important;
+	/*content : "\f073" !important;*/
 	}
 
 a[href*="#team"]::before {
-	content : "\f0c0" !important;
+	/*content : "\f0c0" !important;*/
 	}
 
 a[href*="#works"]::before {
-	content : "\f0b1" !important;
+	/*content : "\f0b1" !important;*/
 	}
 
 a[href*="#pictures"]::before {
-	content : "\f03e" !important;
+	/*content : "\f03e" !important;*/
 	}
 
 a[href*="#videos"]::before {
-	content : "\f03d" !important;
+	/*content : "\f03d" !important;*/
 	}
 
 a[href*="#books"]::before {
-	content : "\f02d" !important;
+	/*content : "\f02d" !important;*/
 	}
 
 a[href*="#art"]::before {
-	content : "\f1fc" !important;
+	/*content : "icon" !important;*/
 	}
 
 a[href*="#awards"]::before {
-	content : "\f02e" !important;
+	/*content : "\f02e" !important;*/
 	}
 
 a[href*="#services"]::before {
-	content : "\f013" !important;
+	/*content : "\f013" !important;*/
 	}
 
 a[href*="#contact"]::before {
-	content : "\f086" !important;
+	/*content : "\f086" !important;*/
 	}
 
 a[href*="#followme"]::before {
-	content : "\f099" !important;
-	color   : #0084b4;
+	/*content : "\f099" !important;*/
+	/*color   : #0084b4;*/
 	}
 
 /*-------------------------------*/
@@ -277,7 +278,7 @@ a[href*="#followme"]::before {
 
 .hamburger {
 	position    : fixed;
-	top         : 20px;
+	top         : 50px;
 	z-index     : 999;
 	display     : block;
 	width       : 32px;
@@ -409,14 +410,53 @@ a[href*="#followme"]::before {
 /*-------------------------------*/
 
 .overlay {
-	position         : fixed;
-	display          : none;
-	width            : 100%;
-	height           : 100%;
-	top              : 0;
-	left             : 0;
-	right            : 0;
-	bottom           : 0;
-	background-color : rgba(250, 250, 250, .8);
-	z-index          : 1;
+	position : fixed;
+	display  : none;
+	width    : 100%;
+	height   : 100%;
+	top      : 0;
+	left     : 0;
+	right    : 0;
+	bottom   : 0;
+	/*background-color : rgba(250, 250, 250, .8);*/
+	z-index  : 1;
+	}
+
+.card.is-open {
+	margin-left : 300px;
+	position    : fixed;
+	top         : 50px;
+	display     : block;
+	margin-top  : 50px;
+	}
+
+.card.is-closed {
+	margin-left : 75px;
+	
+	margin-top  : 50px;
+	position    : fixed;
+	top         : 50px;
+	}
+
+.card {
+	position    : fixed !important;
+	margin-left : 75px;
+	top         : 50px;
+	display     : block;
+	margin-top  : 50px;
+	}
+
+.profile-picture {
+	border-radius      : 100%;
+	overflow           : hidden;
+	-webkit-box-sizing : content-box;
+	-moz-box-sizing    : content-box;
+	box-sizing         : content-box;
+	}
+
+.small-profile-picture {
+	border       : 2px solid #50597b;
+	width        : 40px;
+	height       : 40px;
+	margin-right : 50px;
 	}
