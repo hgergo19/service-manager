@@ -7,51 +7,45 @@
 		<div th:replace="fragments/navbar :: navbar"></div>
 		<div th:replace="fragments/sidebar :: sidebar"></div>
 
-		<div class="card closed  " style="width: 18rem; ">
-			<div class="card-body">
-				<h5 class="card-title">Új munka</h5>
-				<p class="card-text">Valam példaszöveg.</p>
-				<a href="#" class="btn btn-primary">Új munka megnyitása</a>
+		<div class="card-wrapper col-8 closed ">
+			<div class="card col-3  " style="width: 18rem; ">
+				<img src="/images/tools_f.png"
+
+				     class="card-img-top card-image-h" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Job</h5>
+					<h6 class="card-subtitle mb-2 text-muted">Add a new job</h6>
+					<p class="card-text">You can add a new job to an existing customer here.</p>
+					<a href="#" class="btn btn-primary">Create new job</a>
+				</div>
+			</div>
+
+			<div class="card col-3" style="width: 18rem;">
+				<img src="/images/report_screenshot.png" class="card-img-top card-image-h" alt="...">
+
+				<div class="card-body">
+					<h5 class="card-title">Service report</h5>
+					<h6 class="card-subtitle mb-2 text-muted">Create a new report.</h6>
+					<p class="card-text">You can add a new service report to an existing job.</p>
+					<a href="#" class="btn btn-primary">Create</a>
+				</div>
+			</div>
+
+			<div class="card col-3" style="width: 18rem;">
+				<img src="/images/customer_image.png" class="card-img-top card-image-h" alt="...">
+
+				<div class="card-body">
+					<h5 class="card-title">Customer</h5>
+					<h6 class="card-subtitle mb-2 text-muted">Add a new customer.</h6>
+					<p class="card-text">You can add a new customer to the database.</p>
+					<a href="#" class="btn btn-primary">Create</a>
+				</div>
 			</div>
 		</div>
 
 
 	</body>
+	<div th:replace="fragments/sidebarjs :: sidebarjs"></div>
 
 
-	<script>
-        $(document).ready(function () {
-            let trigger = $('.hamburger'),
-                card = $('.card'),
-                overlay = $('.overlay'),
-                isClosed = false;
-
-            trigger.click(function () {
-                hamburger_cross();
-            });
-
-            function hamburger_cross() {
-
-                if (isClosed === true) {
-                    overlay.hide();
-                    card.removeClass('is-open');
-                    card.addClass('is-closed');
-                    trigger.removeClass('is-open');
-                    trigger.addClass('is-closed');
-                    isClosed = false;
-                } else {
-                    overlay.show();
-                    card.removeClass('is-closed');
-                    card.addClass('is-open');
-                    trigger.removeClass('is-closed');
-                    trigger.addClass('is-open');
-                    isClosed = true;
-                }
-            }
-
-            $('[data-toggle="offcanvas"]').click(function () {
-                $('#wrapper').toggleClass('toggled');
-            });
-        });
-	</script>
 </html>

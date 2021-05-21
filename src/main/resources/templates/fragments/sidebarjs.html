@@ -1,0 +1,38 @@
+<div xmlns:th="https://www.w3.org/1999/xhtml"
+     th:fragment="sidebarjs">
+	<script>
+        $(document).ready(function () {
+            let trigger = $('.hamburger'),
+                card = $('.card-wrapper'),
+                overlay = $('.overlay'),
+                isClosed = false;
+
+            trigger.click(function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed === true) {
+                    overlay.hide();
+                    card.removeClass('is-open');
+                    card.addClass('is-closed');
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+                    overlay.show();
+                    card.removeClass('is-closed');
+                    card.addClass('is-open');
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('#wrapper').toggleClass('toggled');
+            });
+        });
+	</script>
+</div>
