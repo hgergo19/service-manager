@@ -10,4 +10,9 @@ public class TestController {
     public String getHome(){
         return "home";
     }
+
+    @GetMapping("/new-job")
+    public String getNewJob(){
+        return "new-job";
+    }
 }

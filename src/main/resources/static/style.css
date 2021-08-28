@@ -422,7 +422,11 @@ a[href*="#followme"]::before {
 	z-index  : 1;
 	}
 
-.card.is-open {
+/*-------------------------------*/
+/*          Card-wrapper         */
+/*-------------------------------*/
+
+.card-wrapper.is-open {
 	margin-left : 300px;
 	position    : fixed;
 	top         : 50px;
@@ -430,7 +434,7 @@ a[href*="#followme"]::before {
 	margin-top  : 50px;
 	}
 
-.card.is-closed {
+.card-wrapper.is-closed {
 	margin-left : 75px;
 	
 	margin-top  : 50px;
@@ -438,13 +442,17 @@ a[href*="#followme"]::before {
 	top         : 50px;
 	}
 
-.card {
+.card-wrapper {
 	position    : fixed !important;
 	margin-left : 75px;
 	top         : 50px;
 	display     : block;
 	margin-top  : 50px;
 	}
+
+/*-------------------------------*/
+/*         Profile-picture       */
+/*-------------------------------*/
 
 .profile-picture {
 	border-radius      : 100%;
@@ -459,4 +467,22 @@ a[href*="#followme"]::before {
 	width        : 40px;
 	height       : 40px;
 	margin-right : 50px;
+	}
+
+/*-------------------------------*/
+/*               Card            */
+/*-------------------------------*/
+
+.card {
+	float        : left;
+	margin-right : 50px;
+	height       : 500px;
+	}
+
+.card-image-h {
+	height : 300px;
+	}
+
+.card.col-3 {
+	padding : 0 !important;
 	}

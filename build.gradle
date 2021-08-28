@@ -8,50 +8,25 @@ group = 'hu.hjst.jobmanager'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
 repositories {
     mavenCentral()
 }
 
-//ext {
-//    set('springCloudGcpVersion', "2.0.0")
-//    set('springCloudVersion', "2020.0.2")
-//}
+
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'com.google.cloud:spring-cloud-gcp-starter'
-//    implementation 'com.google.cloud:spring-cloud-gcp-starter-pubsub'
-//    implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
-    implementation 'org.springframework.session:spring-session-core'
-//    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'mysql:mysql-connector-java'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools:2.5.4'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-web-services'
-    implementation 'org.webjars:bootstrap:4.6.0'
-    implementation 'org.webjars:jquery:3.5.1'
-
-
+    implementation 'org.springframework.boot:spring-boot-starter-web-services:2.5.4'
+    implementation 'org.webjars:bootstrap:5.1.0'
 }
-
-//dependencyManagement {
-//    imports {
-//        mavenBom "com.google.cloud:spring-cloud-gcp-dependencies:${springCloudGcpVersion}"
-//        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-//    }
-//}
 
 test {
     useJUnitPlatform()
