@@ -1,13 +1,14 @@
 package hu.hjst.jobmanager;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JobmanagerApplication {
+public class JobManagerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JobmanagerApplication.class, args);
+        SpringApplication.run(JobManagerApplication.class, args);
     }
 
 }
