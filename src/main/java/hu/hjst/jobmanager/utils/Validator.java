@@ -11,4 +11,11 @@ public class Validator {
       throw new IllegalArgumentException("Please fill the company name!");
     }
   }
+
+  public static void validate(String text, String message) {
+    if (text == null || text.isEmpty()) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
 }
