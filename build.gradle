@@ -24,8 +24,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-web-services:2.5.4'
-    implementation 'org.webjars:bootstrap:5.1.0'
     implementation 'com.googlecode.flyway:flyway-core:2.3.1'
+
+    implementation 'org.webjars:bootstrap:4.6.0'
+    implementation 'org.webjars:jquery:3.5.1'
 
     implementation 'org.modelmapper:modelmapper:2.4.4'
     testImplementation 'org.assertj:assertj-core:3.20.2'
