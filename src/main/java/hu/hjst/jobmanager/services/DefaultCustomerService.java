@@ -15,7 +15,6 @@ public class DefaultCustomerService implements CustomerService {
   private final ModelMapper modelMapper = new ModelMapper();
   private final CustomerRepository repository;
 
-
   @Autowired
   public DefaultCustomerService(CustomerRepository repository) {
     this.repository = repository;
@@ -23,12 +22,15 @@ public class DefaultCustomerService implements CustomerService {
 
   @Override
   public CustomerResponseDto newCustomer(CustomerCreateDto dto) {
-    Validator.validate(dto);
-    if (repository.existsByCompanyNameIgnoreCase(dto.getCompanyName())){
-      throw new IllegalArgumentException("Company already exists"); //TODO : controller level exception handling (later REST)/ error pages
+    Validator.validate(dto.getCompanyName(), "Please fill the company name field!");
+
+    if (repository.existsByCompanyNameIgnoreCase(dto.getCompanyName())) {
+      throw new IllegalArgumentException(
+          "Company already exists"); //TODO : controller level exception handling (later REST)/ error pages
     }
     Customer customer = modelMapper.map(dto, Customer.class);
-    return null;
+    Customer savedCustomer = repository.save(customer);
+    return modelMapper.map(savedCustomer, CustomerResponseDto.class);
   }
 
   @Override
