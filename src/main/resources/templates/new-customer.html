@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head th:include = "fragments/head :: headFragment">
+    <title id = "pageTitle">Új ügyfél hozzáadása</title>
+  </head>
+  <body>
+    <div th:replace = "fragments/navbar :: navbar"></div>
+    <div th:replace = "fragments/sidebar :: sidebar"></div>
+  </body>
+  <div th:replace = "fragments/sidebarjs :: sidebarjs"></div>
+
+
+  <div class = "card-wrapper col-8 closed ">
+    <div class = "input-group col-6">
+      <input type = "text" class = "form-control" placeholder = "Cég" aria-label = "Username">
+    </div>
+    <div class = "input-group col-6">
+      <input type = "text" class = "form-control" placeholder = "Kapcsolattartó"
+             aria-label = "Username">
+    </div>
+    <div class = "input-group col-6">
+      <input type = "text" class = "form-control" placeholder = "Elsődleges email cím"
+             aria-label = "Username">
+      <input type = "text" class = "form-control" placeholder = "Másodlagos email cím"
+             aria-label = "Username">
+    </div>
+
+    <div class = "input-group col-2">
+      <input type = "number" class = "form-control" placeholder = "Irányitószám"
+             aria-label = "Username">
+    </div>
+    <div class = "input-group col-4">
+      <input type = "text" class = "form-control" placeholder = "Ország" aria-label = "Username">
+    </div>
+    <div class = "input-group col-6">
+      <input type = "text" class = "form-control" placeholder = "Város" aria-label = "Username">
+    </div>
+    <div class = "input-group col-6">
+      <input type = "text" class = "form-control" placeholder = "Cím" aria-label = "Username">
+    </div>
+    <div class = "input-group col-6">
+      <input type = "text" class = "form-control" placeholder = "Bankszámlaszám"
+             aria-label = "Username">
+    </div>
+    <div class = "input-group col-6">
+      <input type = "text" class = "form-control" placeholder = "Adószám" aria-label = "Username">
+    </div>
+  </div>
+
+</html>
