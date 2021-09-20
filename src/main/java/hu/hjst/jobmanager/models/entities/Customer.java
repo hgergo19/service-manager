@@ -19,16 +19,10 @@ public class Customer {
   private Long id;
   private String companyName;
   private String contactPersonName;
-  private String primaryEmail;
-  private String secondaryEmail;
+  private String email;
   private String primaryPhoneNumber;
   private String secondaryPhoneNumber;
-  private String zipCode;
-  private String city;
-  private String county;
-  private String countryCode;
-  private String streetAddress;
-  private String postalAddress;
+  private String address;
   private String vatNumber;
   private String accountNumber;
 }

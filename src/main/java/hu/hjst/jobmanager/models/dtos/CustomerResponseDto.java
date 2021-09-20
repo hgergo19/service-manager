@@ -7,14 +7,8 @@ public class CustomerResponseDto {
   private String contactPersonName;
   private String primaryEmail;
   private String secondaryEmail;
-  private String primaryPhoneNumber;
-  private String secondaryPhoneNumber;
-  private String zipCode;
-  private String city;
-  private String county;
-  private String countryCode;
-  private String streetAddress;
-  private String postalAddress;
-  private String vatNumber;
-  private String accountNumber;
+  private String email;
+  private String address; //not necessary ?
+  private String vatNumber; //not necessary ?
+  private String accountNumber; //not necessary ?
 }
