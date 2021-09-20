@@ -9,42 +9,46 @@
   </body>
   <div th:replace = "fragments/sidebarjs :: sidebarjs"></div>
 
+  <div class = "card-wrapper form-container col-10 closed ">
+    <form action = "/login" method = "post" th:action = "@{/login}">
 
-  <div class = "card-wrapper col-8 closed ">
-    <div class = "input-group col-6">
-      <input type = "text" class = "form-control" placeholder = "Cég" aria-label = "Username">
-    </div>
-    <div class = "input-group col-6">
-      <input type = "text" class = "form-control" placeholder = "Kapcsolattartó"
-             aria-label = "Username">
-    </div>
-    <div class = "input-group col-6">
-      <input type = "text" class = "form-control" placeholder = "Elsődleges email cím"
-             aria-label = "Username">
-      <input type = "text" class = "form-control" placeholder = "Másodlagos email cím"
-             aria-label = "Username">
-    </div>
-
-    <div class = "input-group col-2">
-      <input type = "number" class = "form-control" placeholder = "Irányitószám"
-             aria-label = "Username">
-    </div>
-    <div class = "input-group col-4">
-      <input type = "text" class = "form-control" placeholder = "Ország" aria-label = "Username">
-    </div>
-    <div class = "input-group col-6">
-      <input type = "text" class = "form-control" placeholder = "Város" aria-label = "Username">
-    </div>
-    <div class = "input-group col-6">
-      <input type = "text" class = "form-control" placeholder = "Cím" aria-label = "Username">
-    </div>
-    <div class = "input-group col-6">
-      <input type = "text" class = "form-control" placeholder = "Bankszámlaszám"
-             aria-label = "Username">
-    </div>
-    <div class = "input-group col-6">
-      <input type = "text" class = "form-control" placeholder = "Adószám" aria-label = "Username">
-    </div>
+      <div class = "form-group col-12">
+        <label for = "companyName">Cég</label>
+        <input type = "text" id = "companyName" name = "companyName" class = "form-control"
+               placeholder = "Cég">
+      </div>
+      <div class = "form-group col-12">
+        <label for = "contactPersonName">Kapcsolattartó</label>
+        <input type = "text" id = "contactPersonName" name = "contactPersonName"
+               class = "form-control"
+               placeholder = "Kapcsolattartó">
+      </div>
+      <div class = "form-group col-12">
+        <label for = "email">Email</label>
+        <input type = "text" id = "email" name = "email"
+               class = "form-control"
+               placeholder = "myaddress@domain.com">
+      </div>
+      <div class = "form-group col-12">
+        <label for = "address">Cím</label>
+        <input type = "text" id = "address" name = "address" class = "form-control"
+               placeholder = "Cím">
+      </div>
+      <div class = "form-group col-12">
+        <label for = "accountNumber">Bankszámlaszám</label>
+        <input type = "text" id = "accountNumber" name = "accountNumber" class = "form-control"
+               placeholder = "Bankszámlaszám">
+      </div>
+      <div class = "form-group col-12">
+        <label for = "vatNumber">Adószám</label>
+        <input type = "text" class = "form-control" id = "vatNumber" name = "vatNumber"
+               placeholder = "Adószám">
+      </div>
+      <div class = "form-group col-auto">
+        <label for = "note">Megjegyzés</label>
+        <textarea class = "form-control" id = "note" rows = "3"></textarea>
+      </div>
+      <button type = "submit" class = "btn btn-primary margin-1">Sign in</button>
+    </form>
   </div>
-
 </html>
