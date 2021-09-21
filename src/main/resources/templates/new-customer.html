@@ -10,7 +10,7 @@
   <div th:replace = "fragments/sidebarjs :: sidebarjs"></div>
 
   <div class = "card-wrapper form-container col-10 closed ">
-    <form action = "/login" method = "post" th:action = "@{/login}">
+    <form action = "/new-customer" method = "post" th:action = "@{/new-customer}">
 
       <div class = "form-group col-12">
         <label for = "companyName">Cég</label>
@@ -48,7 +48,7 @@
         <label for = "note">Megjegyzés</label>
         <textarea class = "form-control" id = "note" rows = "3"></textarea>
       </div>
-      <button type = "submit" class = "btn btn-primary margin-1">Sign in</button>
+      <button type = "submit" class = "btn btn-primary margin-1">Mentés</button>
     </form>
   </div>
 </html>
