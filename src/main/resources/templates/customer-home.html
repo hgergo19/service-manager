@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:th = "http://www.thymeleaf.org">
+  <head th:include = "fragments/head :: headFragment">
+    <title id = "pageTitle">Ügyfelek kezelése</title>
+  </head>
+  <body>
+    <div th:replace = "fragments/navbar :: navbar"></div>
+    <div th:replace = "fragments/sidebar :: sidebar"></div>
+    <div class = "card-wrapper col-8 closed ">
+      <div class = "card col-3  " style = "width: 18rem; ">
+        <img src = "/images/add_new_customer.png"
+
+             class = "card-img-top card-image-h" alt = "...">
+        <div class = "card-body">
+          <h5 class = "card-title">Új ügyfél hozzáadása</h5>
+          <p class = "card-text">Amenniyben új ügyfelet szeretne regisztrálni a rendszerben,
+                                 kattintson a kezdés gombra.</p>
+          <a href = "/new-customer" class = "btn btn-primary">Kezdés</a>
+        </div>
+      </div>
+
+      <div class = "card col-3" style = "width: 18rem;">
+        <img src = "/images/search.png" class = "card-img-top card-image-h" alt = "...">
+
+        <div class = "card-body">
+          <h5 class = "card-title">Ügyfél keresése</h5>
+          <p class = "card-text">Kilistázza az ügyfeleket. A listában lehet keresni és módosítani a
+                                 kiválasztott ügyfelet.</p>
+          <a href = "/new-customer" class = "btn btn-primary">Keresés</a>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+  <div th:replace = "fragments/sidebarjs :: sidebarjs"></div>
+</html>
