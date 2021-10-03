@@ -1,0 +1,2 @@
+ALTER TABLE customers
+    ADD COLUMN note VARCHAR(255);
