@@ -9,8 +9,8 @@ public class CustomerCreateDto {
   private String contactPersonName;
   private String primaryEmail;
   private String secondaryEmail;
-  private String email;
   private String address;
   private String vatNumber;
   private String accountNumber;
+  private String note;
 }

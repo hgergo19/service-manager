@@ -2,7 +2,6 @@ package hu.hjst.jobmanager.models.dtos;
 
 public class CustomerResponseDto {
 
-  private Long id;
   private String companyName;
   private String contactPersonName;
   private String primaryEmail;
