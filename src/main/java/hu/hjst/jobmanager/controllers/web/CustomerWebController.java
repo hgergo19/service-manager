@@ -15,14 +15,19 @@ public class CustomerWebController {
     this.customerService = customerService;
   }
 
-  @GetMapping("/new-customer")
+  @GetMapping("/customer-home")
   public String customerCreate() {
-    return "new-customer";
+    return "customer-home";
   }
 
   @PostMapping("new-customer")
   public String addCustomer(CustomerCreateDto dto) {
-    System.out.println(dto);
+    customerService.newCustomer(dto);
+    return "new-customer";
+  }
+
+  @GetMapping("new-customer")
+  public String addCustomer() {
     return "new-customer";
   }
 }
