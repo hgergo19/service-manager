@@ -31,6 +31,9 @@ dependencies {
 
     implementation 'org.modelmapper:modelmapper:2.4.4'
     testImplementation 'org.assertj:assertj-core:3.20.2'
+
+    implementation 'org.flywaydb:flyway-core'
+
 }
 
 flyway {
