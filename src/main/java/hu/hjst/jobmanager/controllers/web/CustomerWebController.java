@@ -1,14 +1,11 @@
 package hu.hjst.jobmanager.controllers.web;
 
 import hu.hjst.jobmanager.models.dtos.CustomerCreateDto;
-import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
 import hu.hjst.jobmanager.services.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class CustomerWebController {
@@ -26,8 +23,9 @@ public class CustomerWebController {
 
   @PostMapping("/new-customer")
   public String addCustomer(CustomerCreateDto dto) {
+    System.out.println(dto.getNote());
     customerService.newCustomer(dto);
-    return "new-customer";
+    return "redirect:/customers";
   }
 
   @GetMapping("/new-customer")
@@ -36,8 +34,8 @@ public class CustomerWebController {
   }
 
   @GetMapping("/customers")
-  public String listCustomers(Model model){
-    model.addAttribute("customers",customerService.listCustomers());
+  public String listCustomers(Model model) {
+    model.addAttribute("customers", customerService.listCustomers());
     return "customers";
   }
 }
