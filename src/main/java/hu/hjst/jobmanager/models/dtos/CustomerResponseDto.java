@@ -1,13 +1,20 @@
 package hu.hjst.jobmanager.models.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class CustomerResponseDto {
 
   private String companyName;
   private String contactPersonName;
   private String primaryEmail;
   private String secondaryEmail;
-  private String email;
-  private String address; //not necessary ?
-  private String vatNumber; //not necessary ?
-  private String accountNumber; //not necessary ?
+  private String address;
+  private String vatNumber;
+  private String accountNumber;
+  private String note;
 }
