@@ -8,12 +8,14 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
 @Table(name = "customers")
+@ToString
 public class Customer {
 
   @Id
