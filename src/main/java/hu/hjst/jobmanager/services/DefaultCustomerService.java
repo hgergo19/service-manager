@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class DefaultCustomerService implements CustomerService {
 
@@ -41,6 +44,19 @@ public class DefaultCustomerService implements CustomerService {
   @Override
   public CustomerResponseDto findCustomerByName(String name) {
     return null;
+  }
+
+  @Override
+  public List<CustomerResponseDto> listCustomers() {
+    modelMapper.getConfiguration().setAmbiguityIgnored(true);
+    List<CustomerResponseDto> response = new ArrayList<>();
+    List<Customer> customers = repository.findAll();
+    for (Customer customer : customers) {
+      response.add(modelMapper.map(customer,CustomerResponseDto.class));
+    }
+    System.out.println(response);
+    System.out.println(customers);
+    return response;
   }
 
   @Override
