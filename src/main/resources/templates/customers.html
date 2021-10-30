@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:th = "http://www.thymeleaf.org">
+<head th:include = "fragments/head :: headFragment">
+    <title id = "pageTitle">Ügyfelek kezelése</title>
+</head>
+<body>
+<div th:replace = "fragments/navbar :: navbar"></div>
+<div th:replace = "fragments/sidebar :: sidebar"></div>
+<div class="card-wrapper col-10 closed ">
+    <table  class="table table-striped">
+        <thead>
+        <tr>
+            <th>Cég</th>
+            <th>Kapcsolattartó</th>
+            <th>Elsődleges email</th>
+            <th>Másodlagos email</th>
+            <th>Cím</th>
+            <th>Adószám</th>
+            <th>Számlaszám</th>
+            <th>Megjeygzés</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+
+            <td th:text="${customer.getCompanyName()}"></td>
+            <td th:text="${customer.getContactPersonName()}"></td>
+            <td th:text="${customer.primaryEmail}"></td>
+            <td th:text="${customer.secondaryEmail}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.vatNumber}"></td>
+            <td th:text="${customer.accountNumber}"></td>
+            <td th:text="${customer.note}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<div th:replace = "fragments/sidebarjs :: sidebarjs"></div>
+</html>
