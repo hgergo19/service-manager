@@ -21,13 +21,13 @@ public class CustomerWebController {
 
   @GetMapping("/customer-home")
   public String customerCreate() {
-    return "customer-home";
+    return "new-customer-home";
   }
 
   @PostMapping("/new-customer")
   public String addCustomer(CustomerCreateDto dto) {
     customerService.newCustomer(dto);
-    return "new-customer";
+    return "redirect:/customers";
   }
 
   @GetMapping("/new-customer")
@@ -38,6 +38,6 @@ public class CustomerWebController {
   @GetMapping("/customers")
   public String listCustomers(Model model){
     model.addAttribute("customers",customerService.listCustomers());
-    return "customers";
+    return "new-customers";
   }
 }
