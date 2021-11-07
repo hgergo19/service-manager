@@ -1,61 +1,114 @@
 <!DOCTYPE html>
-<html lang = "en">
-  <head th:include = "fragments/head :: headFragment">
-    <title id = "pageTitle">Új ügyfél hozzáadása</title>
-  </head>
-  <body>
-    <div th:replace = "fragments/navbar :: navbar"></div>
-    <div th:replace = "fragments/sidebar :: sidebar"></div>
-  </body>
-  <div th:replace = "fragments/sidebarjs :: sidebarjs"></div>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">>
 
-  <div class = "card-wrapper form-container col-10 closed ">
-    <form action = "/new-customer" method = "post" th:action = "@{/new-customer}">
+<head th:include="fragments/head :: headFragment">
+  <title id="pageTitle">Új ügsfél hozzáadása</title>
+</head>
+<body>
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav th:replace = "fragments/new-sidebar :: new-sidebar">Empty</nav>
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+    <div class="container-fluid">
+      <h2>Ügyfelek</h2>
+      <hr>
+      <div class="col-8 margin-100">
+        <form  action = "/new-customer" method = "post" th:action = "@{/new-customer}">
 
-      <div class = "form-group col-12">
-        <label for = "companyName">Cég</label>
-        <input type = "text" id = "companyName" name = "companyName" class = "form-control"
-               placeholder = "Cég">
-      </div>
-      <div class = "form-group col-12">
-        <label for = "contactPersonName">Kapcsolattartó</label>
-        <input type = "text" id = "contactPersonName" name = "contactPersonName"
-               class = "form-control"
-               placeholder = "Kapcsolattartó">
-      </div>
-      <div class = "form-group col-12">
-        <label for = "primaryEmail">Email</label>
-        <input type = "text" id = "primaryEmail" name = "primaryEmail"
-               class = "form-control"
-               placeholder = "myaddress@domain.com">
-      </div>
+          <div class = "form-group col-12">
+            <label for = "companyName">Cég</label>
+            <input type = "text" id = "companyName" name = "companyName" class = "form-control"
+                   placeholder = "Cég">
+          </div>
+          <div class = "form-group col-12">
+            <label for = "contactPersonName">Kapcsolattartó</label>
+            <input type = "text" id = "contactPersonName" name = "contactPersonName"
+                   class = "form-control"
+                   placeholder = "Kapcsolattartó">
+          </div>
+          <div class = "form-group col-12">
+            <label for = "primaryEmail">Email</label>
+            <input type = "text" id = "primaryEmail" name = "primaryEmail"
+                   class = "form-control"
+                   placeholder = "myaddress@domain.com">
+          </div>
 
-      <div class = "form-group col-12">
-        <label for = "secondaryEmail">Másodlagos email cím</label>
-        <input type = "text" id = "secondaryEmail" name = "secondaryEmail"
-               class = "form-control"
-               placeholder = "myaddress@domain.com">
+          <div class = "form-group col-12">
+            <label for = "secondaryEmail">Másodlagos email cím</label>
+            <input type = "text" id = "secondaryEmail" name = "secondaryEmail"
+                   class = "form-control"
+                   placeholder = "myaddress@domain.com">
+          </div>
+          <div class = "form-group col-12">
+            <label for = "address">Cím</label>
+            <input type = "text" id = "address" name = "address" class = "form-control"
+                   placeholder = "Cím">
+          </div>
+          <div class = "form-group col-12">
+            <label for = "accountNumber">Bankszámlaszám</label>
+            <input type = "text" id = "accountNumber" name = "accountNumber" class = "form-control"
+                   placeholder = "Bankszámlaszám">
+          </div>
+          <div class = "form-group col-12">
+            <label for = "vatNumber">Adószám</label>
+            <input type = "text" class = "form-control" id = "vatNumber" name = "vatNumber"
+                   placeholder = "Adószám">
+          </div>
+          <div class = "form-group col-auto">
+            <label for = "note">Megjegyzés</label>
+            <textarea class = "form-control" id = "note" name="note" rows = "3"></textarea>
+          </div>
+          <button type = "submit" class = "btn btn-primary margin-1">Mentés</button>
+        </form>
       </div>
-      <div class = "form-group col-12">
-        <label for = "address">Cím</label>
-        <input type = "text" id = "address" name = "address" class = "form-control"
-               placeholder = "Cím">
-      </div>
-      <div class = "form-group col-12">
-        <label for = "accountNumber">Bankszámlaszám</label>
-        <input type = "text" id = "accountNumber" name = "accountNumber" class = "form-control"
-               placeholder = "Bankszámlaszám">
-      </div>
-      <div class = "form-group col-12">
-        <label for = "vatNumber">Adószám</label>
-        <input type = "text" class = "form-control" id = "vatNumber" name = "vatNumber"
-               placeholder = "Adószám">
-      </div>
-      <div class = "form-group col-auto">
-        <label for = "note">Megjegyzés</label>
-        <textarea class = "form-control" id = "note" rows = "3"></textarea>
-      </div>
-      <button type = "submit" class = "btn btn-primary margin-1">Mentés</button>
-    </form>
-  </div>
+      <!--            <h5>More templates</h5>-->
+      <!--            <hr>-->
+      <!--            <div class="row">-->
+      <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
+      <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
+
+      <!--                    </div>-->
+      <!--                </div>-->
+      <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
+      <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
+
+      <!--                    </div>-->
+      <!--                </div>-->
+      <!--            </div>-->
+      <hr>
+
+      <footer class="text-center">
+        <div class="mb-2">
+          <small>
+            © 2020 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="https://azouaoui.netlify.com">
+            Mohamed Azouaoui
+          </a>
+          </small>
+        </div>
+        <div>
+          <a href="https://github.com/azouaoui-med" target="_blank">
+            <img alt="GitHub followers" src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social" />
+          </a>
+          <a href="https://twitter.com/azouaoui_med" target="_blank">
+            <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social" />
+          </a>
+        </div>
+      </footer>
+    </div>
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script th:replace = "fragments/new-sidebarjs :: new-sidebarjs"></script>
+</body>
+
 </html>
