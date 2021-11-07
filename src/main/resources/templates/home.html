@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 	<head th:include="fragments/head :: headFragment">
 		<title id="pageTitle">Home page title</title>
 	</head>
@@ -7,7 +8,7 @@
 		<div th:replace="fragments/navbar :: navbar"></div>
 		<div th:replace="fragments/sidebar :: sidebar"></div>
 
-		<div class="card-wrapper col-8 closed ">
+		<div class="card-wrapper col-8">
 			<div class="card col-3  " style="width: 18rem; ">
 				<img src="/images/tools_f.png"
 
