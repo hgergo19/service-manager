@@ -9,12 +9,13 @@ import lombok.ToString;
 @ToString
 public class CustomerResponseDto {
 
-  private String companyName;
-  private String contactPersonName;
-  private String primaryEmail;
-  private String secondaryEmail;
-  private String address;
-  private String vatNumber;
-  private String accountNumber;
-  private String note;
+    private Long id;
+    private String companyName;
+    private String contactPersonName;
+    private String primaryEmail;
+    private String secondaryEmail;
+    private String address;
+    private String vatNumber;
+    private String accountNumber;
+    private String note;
 }
