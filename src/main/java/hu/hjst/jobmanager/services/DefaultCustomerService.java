@@ -5,13 +5,14 @@ import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
 import hu.hjst.jobmanager.models.entities.Customer;
 import hu.hjst.jobmanager.repositories.CustomerRepository;
 import hu.hjst.jobmanager.utils.Validator;
+import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class DefaultCustomerService implements CustomerService {
