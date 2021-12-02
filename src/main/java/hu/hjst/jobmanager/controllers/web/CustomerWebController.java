@@ -6,6 +6,7 @@ import hu.hjst.jobmanager.services.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Controller
 public class CustomerWebController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerWebController(CustomerService customerService) {
         this.customerService = customerService;
@@ -46,5 +47,12 @@ public class CustomerWebController {
     public String deleteCustomerById(@RequestParam("id") Long buyerId) {
         customerService.deleteCustomerById(buyerId);
         return "redirect:/customers";
+    }
+
+    @GetMapping("/customer/{id}")
+    public String customerDetailsPage(Model model, @PathVariable Long id) {  //TODO id validity check
+        CustomerResponseDto customerById = customerService.findCustomerById(id);
+        model.addAttribute("customer",customerById);
+        return "customer-details";
     }
 }
