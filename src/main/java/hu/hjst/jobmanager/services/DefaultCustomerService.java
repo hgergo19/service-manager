@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultCustomerService implements CustomerService {
@@ -38,7 +39,8 @@ public class DefaultCustomerService implements CustomerService {
 
     @Override
     public CustomerResponseDto findCustomerById(Long id) {
-        return null;
+        Optional<Customer> byId = repository.findById(id);
+        return byId.map(customer -> modelMapper.map(customer, CustomerResponseDto.class)).orElseThrow(() -> new IllegalArgumentException("not found"));
     }
 
     @Override
