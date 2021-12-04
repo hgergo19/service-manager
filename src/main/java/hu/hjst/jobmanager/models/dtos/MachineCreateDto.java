@@ -15,7 +15,7 @@ public class MachineCreateDto {
     private String type;
     private String controlType;
     private Integer machineHours;
-    private Integer spindle_hours;
+    private Integer spindleHours;
     private String NCsoftwareVersion;
     private String PLCsoftwareVersion;
     private Customer customer;
