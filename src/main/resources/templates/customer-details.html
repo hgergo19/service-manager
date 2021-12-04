@@ -24,18 +24,17 @@
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                     <div class="card rounded-0 p-0 shadow-sm">
 
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Gépek</li>
-                            <li class="list-group-item">DMC 103 V | 2885 - 5845</li>
-                            <li class="list-group-item">DMC 60 H | 2885 - 5845</li>
-                            <li class="list-group-item">DMC 104 V linear | 2885 - 5845</li>
+                        <ul class="list-group list-group-flush" th:each="machine : ${machines}">
+                            <li class="list-group-item"
+                                th:text="${machine.type} +'       | '+ ${machine.serialNumber}"></li>
+
                         </ul>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                     <div class="card rounded-0 p-0 shadow-sm">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Kapcsolattartó : <span
+                            <li class="list-group-item"><small>Kapcsolattartó :</small> <span style="font-size: larger"
                                     th:text="${customer.getContactPersonName()}"></span></li>
                             <li class="list-group-item">Elsődleges email : <span
                                     th:text="${customer.getPrimaryEmail()}"></span></li>
