@@ -46,6 +46,7 @@ public class DefaultCustomerService implements CustomerService {
 
     @Override
     public CustomerResponseDto findCustomerByName(String name) {
+        // TODO : IMPL
         return null;
     }
 
@@ -57,18 +58,17 @@ public class DefaultCustomerService implements CustomerService {
         for (Customer customer : customers) {
             response.add(modelMapper.map(customer, CustomerResponseDto.class));
         }
-        System.out.println(response);
-        System.out.println(customers);
         return response;
     }
 
     @Override
     public void deleteCustomerById(Long id) {
-        //Null validation ?
+        //TODO : Null validation ?
         repository.deleteById(id);
     }
 
     @Override
     public void modifyCustomerById(Long id) {
+        // TODO : IMPL
     }
 }
