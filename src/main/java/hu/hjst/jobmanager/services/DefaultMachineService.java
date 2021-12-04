@@ -2,20 +2,25 @@ package hu.hjst.jobmanager.services;
 
 import hu.hjst.jobmanager.models.dtos.MachineCreateDto;
 import hu.hjst.jobmanager.models.dtos.MachineDto;
+import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.repositories.MachineRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static hu.hjst.jobmanager.utils.Validator.validate;
 
+@Service
 public class DefaultMachineService implements MachineService {
 
     private final ModelMapper modelMapper = new ModelMapper();
-    private MachineRepository repository;
+    private final MachineRepository repository;
+    private final CustomerService customerService;
 
-    public DefaultMachineService(MachineRepository repository) {
+    public DefaultMachineService(MachineRepository repository, CustomerService customerService) {
         this.repository = repository;
+        this.customerService = customerService;
     }
 
     @Override
@@ -26,8 +31,7 @@ public class DefaultMachineService implements MachineService {
         validate(dto.getType(),"You must enter a valid machine type!");
         validate(dto.getCustomer(),"You must enter a valid machine type!");
 
-        //TODO : IMPLEMENTATION
-        return null;
+        return modelMapper.map(repository.save(modelMapper.map(dto, Machine.class)),MachineDto.class);
     }
 
     @Override
