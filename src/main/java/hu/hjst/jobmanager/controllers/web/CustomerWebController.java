@@ -51,6 +51,8 @@ public class CustomerWebController {
     public String customerDetailsPage(Model model, @PathVariable Long id) {  //TODO id validity check
         CustomerResponseDto customerById = customerService.findCustomerById(id);
         model.addAttribute("customer",customerById);
+        model.addAttribute("machines",customerById.getMachines());
+      System.out.println(customerById.getMachines());
         return "customer-details";
     }
 }
