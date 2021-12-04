@@ -3,6 +3,7 @@ package hu.hjst.jobmanager.models.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "machines") //TODO : create sql DDL script
+@Table(name = "machines")
 public class Machine {
 
     @Id
@@ -23,11 +24,11 @@ public class Machine {
     @Column(name = "control", length = 20)
     private String controlType;
 
-    @Column(name = "machine_hours", length = 6)
-    private String machineHours;
+    @Column(name = "machine_hours")
+    private Integer machineHours;
 
-    @Column(name = "spindle_hours", length = 6)
-    private String spindle_hours;
+    @Column(name = "spindle_hours")
+    private Integer spindle_hours;
 
     @Column(name = "nc_software_version", length = 15)
     private String NCsoftwareVersion;
@@ -35,9 +36,19 @@ public class Machine {
     @Column(name = "plc_software_version", length = 15)
     private String PLCsoftwareVersion;
 
-    @ManyToOne
+    @ManyToOne //TODO cascade style ?
     private Customer customer;
 
-    //TODO : machine state ?
-    //TODO : last updated and created !
+    private LocalDateTime createdAt;
+    private LocalDateTime lastUpdatedAt;
+
+    @PrePersist
+    private void setCreationTime() {
+        createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    private void setModificationDate() {
+        lastUpdatedAt = LocalDateTime.now();
+    }
 }
