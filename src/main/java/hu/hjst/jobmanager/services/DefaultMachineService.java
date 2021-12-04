@@ -2,13 +2,30 @@ package hu.hjst.jobmanager.services;
 
 import hu.hjst.jobmanager.models.dtos.MachineCreateDto;
 import hu.hjst.jobmanager.models.dtos.MachineDto;
+import hu.hjst.jobmanager.repositories.MachineRepository;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
-public class DefaultMachineServiceI implements MachineService {
+import static hu.hjst.jobmanager.utils.Validator.validate;
+
+public class DefaultMachineService implements MachineService {
+
+    private final ModelMapper modelMapper = new ModelMapper();
+    private MachineRepository repository;
+
+    public DefaultMachineService(MachineRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public MachineDto newMachine(MachineCreateDto dto) {
+        //validation
+        validate(dto,"Machine object cannot be null!");
+        validate(dto.getSerialNumber(),"You must enter a valid machine number!");
+        validate(dto.getType(),"You must enter a valid machine type!");
+        validate(dto.getCustomer(),"You must enter a valid machine type!");
+
         //TODO : IMPLEMENTATION
         return null;
     }
