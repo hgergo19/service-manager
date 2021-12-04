@@ -29,7 +29,7 @@ public class Customer {
     private String accountNumber;
     private String note;
 
-    @OneToMany // TODO config connection!
+    @OneToMany(mappedBy = "customer")
     @ToString.Exclude
     private List<Machine> machines;
 }
