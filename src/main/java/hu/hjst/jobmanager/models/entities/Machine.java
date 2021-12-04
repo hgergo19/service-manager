@@ -21,7 +21,7 @@ public class Machine {
     @Column(name = "type", length = 10)
     private String type;
 
-    @Column(name = "control", length = 20)
+    @Column(name = "control_type", length = 20)
     private String controlType;
 
     @Column(name = "machine_hours")
