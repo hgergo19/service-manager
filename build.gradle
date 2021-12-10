@@ -15,7 +15,7 @@ repositories {
 
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.6'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
     compileOnly 'org.projectlombok:lombok:1.18.20'
@@ -32,14 +32,16 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:2.4.4'
     testImplementation 'org.assertj:assertj-core:3.20.2'
 
-    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-core:8.0.2'
+
+    implementation 'com.h2database:h2:1.4.200'
 
 }
 
 flyway {
-    url = 'jdbc:mysql://localhost/job_manager'
+    url = 'jdbc:mysql://localhost/service_manager'
     user = 'root'
-    password = 'LaNa80766769'
+    password = 'root'
     baselineOnMigrate = true
 }
 
