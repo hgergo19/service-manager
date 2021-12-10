@@ -42,7 +42,31 @@ public class Job {
     private Machine machine;
 
 
-    public void generateId() {
-        //TODO generation logic same as before 21001L
+    public void initFirstId() {
+        String yearPreFix = getYearPreFix();
+
+        String firstString = yearPreFix + "001";
+        this.jobId = Long.parseLong(firstString);
+    }
+
+
+    public void generateId(Long lastId) {
+        //check if currentYear
+        String lastYear = lastId.toString().substring(0, 2);
+        String currentYear = getYearPreFix();
+        if (lastYear.equals(currentYear)) {
+            //add if same
+
+            this.jobId = lastId + 1;
+        } else {
+            //call initFirst if not
+            initFirstId();
+        }
+    }
+
+    private String getYearPreFix() {
+        int year = LocalDate.now().getYear();
+        String yearString = Integer.toString(year);
+        return yearString.substring(2);
     }
 }
