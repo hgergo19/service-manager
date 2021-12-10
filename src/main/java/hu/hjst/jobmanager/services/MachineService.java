@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface MachineService {
 
-    MachineDto newMachine (MachineCreateDto dto);
+    MachineDto newMachine(MachineCreateDto dto);
 
-    MachineDto findMachinesBySerialNumber (String serialNumber);
+    MachineDto findMachinesBySerialNumber(String serialNumber);
 
     List<MachineDto> findMachinesByType(String type);
 
@@ -20,6 +20,4 @@ public interface MachineService {
     void deleteMachineBySerialNumber(String serialNumber);
 
     void modifyMachineBySerialNumber(String serialNumber);
-
-
 }
