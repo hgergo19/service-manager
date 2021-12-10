@@ -1,9 +1,13 @@
 package hu.hjst.jobmanager.models.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -15,7 +19,7 @@ import java.time.LocalDateTime;
 public class Machine {
 
     @Id
-    @Column (length = 20 , nullable = false, unique=true)
+    @Column(length = 20, nullable = false, unique = true)
     private String serialNumber;
 
     @Column(name = "type", length = 10)
@@ -38,6 +42,10 @@ public class Machine {
 
     @ManyToOne //TODO cascade style ?
     private Customer customer;
+
+    @OneToMany(mappedBy = "machine")
+    @ToString.Exclude
+    private List<Job> jobs;
 
     private LocalDateTime createdAt;
     private LocalDateTime lastUpdatedAt;
