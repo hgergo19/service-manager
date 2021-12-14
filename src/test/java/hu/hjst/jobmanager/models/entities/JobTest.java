@@ -1,11 +1,8 @@
 package hu.hjst.jobmanager.models.entities;
 
 import hu.hjst.jobmanager.repositories.JobRepository;
-import hu.hjst.jobmanager.services.DefaultJobService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -15,7 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -57,6 +54,7 @@ class JobTest {
 
 
     @Test
+    @DirtiesContext
     void generateIdAddOneShouldAddOneToJobNumberIfSameYear() {
         manager.persistAndFlush(job1);
         job2.generateId(21001L);
