@@ -49,7 +49,7 @@ class JobTest {
         List<Job> jobs = repository.findAll();
 
         assertEquals(1, jobs.size());
-        assertEquals(21001L, jobs.get(0).getJobId());
+        assertEquals(22001L, jobs.get(0).getJobId());
     }
 
 
@@ -57,13 +57,13 @@ class JobTest {
     @DirtiesContext
     void generateIdAddOneShouldAddOneToJobNumberIfSameYear() {
         manager.persistAndFlush(job1);
-        job2.generateId(21001L);
+        job2.generateId(22001L);
         manager.persistAndFlush(job2);
 
         List<Job> jobs = repository.findAll();
 
         assertEquals(2, jobs.size(),"Size should be 2 after saving both example entities.");
-        assertEquals(21001L, jobs.get(0).getJobId(),"Generate first id works as expected");
-        assertEquals(21002L, jobs.get(1).getJobId(),"Adds one to job number if same year prefix.");
+        assertEquals(22001L, jobs.get(0).getJobId(),"Generate first id works as expected");
+        assertEquals(22002L, jobs.get(1).getJobId(),"Adds one to job number if same year prefix.");
     }
 }
