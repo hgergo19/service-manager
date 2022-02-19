@@ -17,6 +17,8 @@ public interface JobService {
 
     List<JobDto> findJobsByCustomers();
 
+    List<JobDto> findActiveJobs();
+
     void deleteJobById(Long jobId); //ONLY ADMIN
 
     void modifyJobById(Long jobId); //ONLY ADMIN
