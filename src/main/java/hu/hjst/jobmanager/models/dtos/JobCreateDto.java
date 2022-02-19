@@ -14,8 +14,5 @@ public class JobCreateDto {
     private Boolean isInvoiced;
     private String invoiceNumber;
     private String note;
-    private String machineNumber;
-
-    //TODO why ??
-//    private Machine machine;
+    private String machineNumber; // TODO : manually convert to Machine -> select from list in UI
 }
