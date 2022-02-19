@@ -38,7 +38,8 @@ public class Job {
     @Column(name = "note")
     private String note;
 
-    @ManyToOne //TODO config relation
+    @ManyToOne
+    @JoinColumn(name = "serial_number")
     private Machine machine;
 
 
