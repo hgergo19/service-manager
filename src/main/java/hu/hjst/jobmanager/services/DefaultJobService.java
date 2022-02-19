@@ -1,5 +1,6 @@
 package hu.hjst.jobmanager.services;
 
+import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
 import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
 import hu.hjst.jobmanager.models.entities.Job;
@@ -11,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -87,6 +89,16 @@ public class DefaultJobService implements JobService {
     public List<JobDto> findJobsByCustomers() {
         //TODO : IMPLEMENTATION
         return null;
+    }
+
+    @Override
+    public List<JobDto> findActiveJobs() {
+        List<Job> allActive = repository.findAllActive();
+        List<JobDto> response = new ArrayList<>();
+        for (Job job : allActive) {
+            response.add(mapper.map(job, JobDto.class));
+        }
+        return response;
     }
 
     @Override
