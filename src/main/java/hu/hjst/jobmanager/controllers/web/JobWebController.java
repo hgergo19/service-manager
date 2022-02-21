@@ -31,6 +31,6 @@ public class JobWebController {
     @GetMapping("/add-new-job")
     public String addNewJob(Model m) {
         m.addAttribute("customers", customerService.listCustomers());
-        return "add-new-job-form";
+        return "add-new-job-select-customer";
     }
 }
