@@ -41,7 +41,7 @@ dependencies {
 flyway {
     url = 'jdbc:mysql://localhost/service_manager'
     user = 'root'
-    password = 'root'
+    password = 'LaNa80766769'
     baselineOnMigrate = true
 }
 
