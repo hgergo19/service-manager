@@ -1,50 +1,26 @@
 <!DOCTYPE html>
-<html lang="en"xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
-	<head th:include="fragments/head :: headFragment">
-		<title id="pageTitle">Home page title</title>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 	</head>
 	<body>
-		<div th:replace="fragments/navbar :: navbar"></div>
-		<div th:replace="fragments/sidebar :: sidebar"></div>
-
-		<div class="card-wrapper col-8">
-			<div class="card col-3  " style="width: 18rem; ">
-				<img src="/images/tools_f.png"
-
-				     class="card-img-top card-image-h" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Job</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Add a new job</h6>
-					<p class="card-text">You can add a new job to an existing customer here.</p>
-					<a href="#" class="btn btn-primary">Create new job</a>
-				</div>
-			</div>
-
-			<div class="card col-3" style="width: 18rem;">
-				<img src="/images/report_screenshot.png" class="card-img-top card-image-h" alt="...">
-
-				<div class="card-body">
-					<h5 class="card-title">Service report</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Create a new report.</h6>
-					<p class="card-text">You can add a new service report to an existing job.</p>
-					<a href="#" class="btn btn-primary">Create</a>
-				</div>
-			</div>
-
-			<div class="card col-3" style="width: 18rem;">
-				<img src="/images/customer_image.png" class="card-img-top card-image-h" alt="...">
-
-				<div class="card-body">
-					<h5 class="card-title">Customer</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Add a new customer.</h6>
-					<p class="card-text">You can add a new customer to the database.</p>
-					<a href="/new-customer" class="btn btn-primary">Create</a>
-				</div>
-			</div>
-		</div>
-
-
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">T1</th>
+					<th scope="col">T2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1 2</td>
+					<td>1 2</td>
+				</tr>
+			</tbody>
+		</table>
+		<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 	</body>
-	<div th:replace="fragments/sidebarjs :: sidebarjs"></div>
 </html>
