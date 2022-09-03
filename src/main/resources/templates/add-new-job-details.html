@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/head :: headFragment">
+    <title id="pageTitle">Ügyfelek</title>
+</head>
+<body>
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <nav th:replace="fragments/new-sidebar :: new-sidebar">Empty</nav>
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <div class="row col-lg-12 col-md-10 col-sm-8">
+                <h2>Új munka felvétele</h2>
+                <hr>
+                <div>
+                    <h1  id = "customer" th:text="${customer.companyName}"> Nem sikerült :(
+                    </h1>
+                </div>
+                <div class="col-8 margin-100">
+                    <form  action = "/add-new-job" method = "post" th:action = "@{/add-new-job}"> // TODO : POST endpoint
+
+                        <div class = "form-group col-12">
+
+                            <div class = "form-group col-auto">
+
+                            </div>
+
+                            <input name="customer.id" id="customer.id" hidden="hidden" value=""/>
+                        </div>
+                        <button type = "submit" class = "btn btn-primary margin-1">Mentés</button>
+                    </form>
+                </div>
+                <hr>
+
+            </div>
+            <!--            <h5>More templates</h5>-->
+            <!--            <hr>-->
+            <!--            <div class="row">-->
+            <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
+            <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
+
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
+            <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
+
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <hr>
+
+            <footer class="text-center">
+                <div class="mb-2">
+                    <small>
+                        © 2020 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank"
+                                                                                               rel="noopener noreferrer"
+                                                                                               href="https://azouaoui.netlify.com">
+                        Mohamed Azouaoui
+                    </a>
+                    </small>
+                </div>
+                <div>
+                    <a href="https://github.com/azouaoui-med" target="_blank">
+                        <img alt="GitHub followers"
+                             src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social"/>
+                    </a>
+                    <a href="https://twitter.com/azouaoui_med" target="_blank">
+                        <img alt="Twitter Follow"
+                             src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social"/>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </main>
+    <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script th:replace="fragments/new-sidebarjs :: new-sidebarjs"></script>
+</body>
+
+</html>
