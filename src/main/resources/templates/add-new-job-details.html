@@ -21,15 +21,23 @@
                     </h1>
                 </div>
                 <div class="col-8 margin-100">
-                    <form  action = "/add-new-job" method = "post" th:action = "@{/add-new-job}"> // TODO : POST endpoint
+                    <form  action = "/add-new-job/{id}" method = "post" th:action = "@{/add-new-job/{id}}">
 
                         <div class = "form-group col-12">
 
+
                             <div class = "form-group col-auto">
-
+                                <input name="customerId" id="customerId" hidden="hidden" value="customer.id"/>
+                                <label for = "serialNumber">Gép</label>
+                                <select class = "form-control" id = "serialNumber" name="serialNumber">
+                                    <option
+                                            th:each="machine :${machines}"
+                                            th:value="${machine.serialNumber}"
+                                            th:text="${machine.serialNumber}"
+                                            th:data="${machine.serialNumber}"
+                                    ></option>
+                                </select>
                             </div>
-
-                            <input name="customer.id" id="customer.id" hidden="hidden" value=""/>
                         </div>
                         <button type = "submit" class = "btn btn-primary margin-1">Mentés</button>
                     </form>
@@ -37,20 +45,6 @@
                 <hr>
 
             </div>
-            <!--            <h5>More templates</h5>-->
-            <!--            <hr>-->
-            <!--            <div class="row">-->
-            <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
-            <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
-
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
-            <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
-
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
             <hr>
 
             <footer class="text-center">
