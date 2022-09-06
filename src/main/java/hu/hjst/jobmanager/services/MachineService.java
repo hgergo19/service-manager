@@ -2,6 +2,7 @@ package hu.hjst.jobmanager.services;
 
 import hu.hjst.jobmanager.models.dtos.MachineCreateDto;
 import hu.hjst.jobmanager.models.dtos.MachineDto;
+import hu.hjst.jobmanager.models.entities.Machine;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface MachineService {
 
     List<MachineDto> findMachinesByType(String type);
 
-    List<MachineDto> findMachinesByCustomer(String customerName);
+    List<Machine> findMachinesByCustomer(Long customerId);
 
     List<MachineDto> findAllMachines();
 
