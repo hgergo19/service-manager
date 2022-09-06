@@ -1,6 +1,5 @@
 package hu.hjst.jobmanager.services;
 
-import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
 import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
 import hu.hjst.jobmanager.models.entities.Job;
@@ -38,12 +37,12 @@ public class DefaultJobService implements JobService {
     public JobDto newJob(JobCreateDto dto) {
         //validate job data
         validate(dto, "Object must not be null!");
-        validate(dto.getMachineNumber(), "You must choose a machine for a job!!");
+        validate(dto.getSerialNumber(), "You must choose a machine for a job!!");
 
         //convert dto to entity
         Job jobEntity = mapper.map(dto, Job.class);
 
-        setMachineOfJob(dto.getMachineNumber(), jobEntity);
+        setMachineOfJob(dto.getSerialNumber(), jobEntity);
 
         //set date to  today if not present
         if (jobEntity.getStartDate() == null) {
@@ -63,6 +62,8 @@ public class DefaultJobService implements JobService {
 
             jobEntity.generateId(jobIds.get(0));
         }
+        jobEntity.setIsCompleted(false);
+        jobEntity.setIsInvoiced(false);
         repository.save(jobEntity);
         return mapper.map(jobEntity, JobDto.class);
     }
