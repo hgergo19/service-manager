@@ -15,35 +15,48 @@
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-10 col-sm-8">
                 <h2>Új munka felvétele</h2>
+                <h5 th:text="${customer.companyName}"></h5>
                 <hr>
-                <div>
-                    <h1  id = "customer" th:text="${customer.companyName}"> Nem sikerült :(
-                    </h1>
-                </div>
                 <div class="col-8 margin-100">
-                    <form  action = "/add-new-job/{id}" method = "post" th:action = "@{/add-new-job/{id}}">
-
-                        <div class = "form-group col-12">
-
-
-                            <div class = "form-group col-auto">
+                    <form action="/add-new-job" method="post" th:action="@{/add-new-job}">
+                        <div class="form-group col-12">
+                            <div class="form-group col-auto">
                                 <input name="customerId" id="customerId" hidden="hidden" value="customer.id"/>
-                                <label for = "serialNumber">Gép</label>
-                                <select class = "form-control" id = "serialNumber" name="serialNumber">
-                                    <option
-                                            th:each="machine :${machines}"
-                                            th:value="${machine.serialNumber}"
-                                            th:text="${machine.serialNumber}"
-                                            th:data="${machine.serialNumber}"
-                                    ></option>
-                                </select>
+
+                                <div class="form-group col-12">
+                                    <label for="startDate">Kezdő dátum</label>
+                                    <input type="date" id="startDate" name="startDate" class="form-control">
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <label for="endDate">Vége dátum</label>
+                                    <input type="date" id="endDate" name="endDate" class="form-control">
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <label for="note">Megjegyzés</label>
+                                    <input type="text" id="note" name="note" class="form-control"
+                                           placeholder="Max 255 karakter">
+                                </div>
+
+
+                                <div class="form-group col-12">
+                                    <label for="serialNumber">Gép</label>
+                                    <select class="form-control" id="serialNumber" name="serialNumber">
+                                        <option
+                                                th:each="machine :${machines}"
+                                                th:value="${machine.serialNumber}"
+                                                th:text="|Gyári szám:      ${machine.serialNumber}          Típus:    ${machine.type}|"
+                                        ></option>
+                                    </select>
+
+                                </div>
                             </div>
                         </div>
-                        <button type = "submit" class = "btn btn-primary margin-1">Mentés</button>
+                        <button type="submit" class="btn btn-primary margin-1">Mentés</button>
                     </form>
                 </div>
                 <hr>
-
             </div>
             <hr>
 
