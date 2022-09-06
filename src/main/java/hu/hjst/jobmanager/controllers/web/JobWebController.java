@@ -1,18 +1,14 @@
 package hu.hjst.jobmanager.controllers.web;
 
-import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
-import hu.hjst.jobmanager.models.entities.Customer;
+import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.services.CustomerService;
 import hu.hjst.jobmanager.services.JobService;
+import hu.hjst.jobmanager.services.MachineService;
 import hu.hjst.jobmanager.utils.Validator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,10 +17,15 @@ public class JobWebController {
 
     private JobService service;
     private CustomerService customerService;
+    private MachineService machineService;
 
-    public JobWebController(JobService service, CustomerService customerService) {
+    public JobWebController(JobService service,
+                            CustomerService customerService,
+                            MachineService machineService) {
+
         this.service = service;
         this.customerService = customerService;
+        this.machineService = machineService;
     }
 
     @GetMapping("/jobs-home")
@@ -40,25 +41,24 @@ public class JobWebController {
         return "add-new-job-select-customer";
     }
 
-    @PostMapping("/add-new-job-select-customer")
+    @PostMapping("/select-customer")
     public String selectCustomer(Long id){
         Validator.validate(id,"ID cannot be null!");
-        System.out.println(id);
-
-        //TODO search if customer exists and pass it add-new-job-deatils
         return "redirect:add-new-job/" + id;
     }
 
     @GetMapping("/add-new-job/{id}"  )
     public String addNewJobForm(@PathVariable Long id, Model m) {
+        List<Machine> machinesByCustomer = machineService.findMachinesByCustomer(id);
+        m.addAttribute("machines" , machinesByCustomer);
         m.addAttribute("customer" , customerService.findCustomerById(id));
         return "add-new-job-details";
     }
 
-    @PostMapping("/add-new-job"  )
-    public String addNewJob(JobCreateDto dto) {
-       //TODO IMPL!!
-        return "redirect:jobs-home";
-    }
+//    @PostMapping("/add-new-job/{id}")
+//    public String addNewJob(@PathVariable Long id, Model model, JobCreateDto dto) {
+//       model.addAttribute("machine" , machineService.findMachinesByCustomer(id) );
+//        return "redirect:jobs-home";
+//    }
 
 }
