@@ -4,6 +4,7 @@ import hu.hjst.jobmanager.models.dtos.MachineCreateDto;
 import hu.hjst.jobmanager.models.dtos.MachineDto;
 import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.repositories.MachineRepository;
+import hu.hjst.jobmanager.utils.Validator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -47,9 +48,10 @@ public class DefaultMachineService implements MachineService {
     }
 
     @Override
-    public List<MachineDto> findMachinesByCustomer(String customerName) {
-        //TODO : IMPLEMENTATION
-        return null;
+    public List<Machine> findMachinesByCustomer(Long customerId) {
+        Validator.validate(customerId,"Customer id cannot be null!!");
+        List<Machine> allByCustomerId = repository.findByCustomerId(customerId.intValue());
+        return allByCustomerId;
     }
 
     @Override
