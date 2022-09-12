@@ -66,4 +66,10 @@ public class JobWebController {
         return "redirect:jobs-home";
     }
 
+    @GetMapping("/job-details/{id}")
+    public String getJobDetails(Model model, @PathVariable Long id){
+
+        return null;
+    }
+
 }
