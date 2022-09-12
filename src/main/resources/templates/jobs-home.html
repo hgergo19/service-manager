@@ -14,27 +14,63 @@
     <!-- sidebar-wrapper  -->
     <main class="page-content">
         <div class="container-fluid">
-            <h2>Új munka felvétele</h2>
-            <hr>
-            <div class="col-8 margin-100">
-                <form action="/select-customer" method="post" th:action="@{/select-customer}">
+            <div class="row col-lg-12 col-md-10 col-sm-8">
 
-                    <div class="form-group col-12">
-                        <div class="form-group col-auto">
-                            <label for="id">Vevő</label>
-                            <select class="form-control" id="id" name="id">
-                                <option
-                                        th:each="customer :${customers}"
-                                        th:value="${customer.id}"
-                                        th:text="${customer.companyName}"
-                                ></option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary margin-1">Mentés</button>
-                    </div>
-                </form>
+
+                <div th:if="${jobs==null or jobs.isEmpty}">Nincsenek aktív munkák.</div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>action</th>
+                        <th>Id</th>
+                        <th>Kezdés</th>
+                        <th>Gépszám</th>
+                        <th>Géptípus</th>
+                        <th>Állapot</th>
+                        <th>Megjegyzés</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="job : ${jobs}">
+                        <td>
+                            <form>
+                                <a>
+                                    <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i>
+                                    </button>
+                                </a>
+                            </form>
+                        </td>
+                        <td th:text="${job.getJobId()}"></td>
+                        <td th:text="${job.getStartDate()}"></td>
+                        <td th:text="${job.getMachine().getSerialNumber()}"></td>
+                        <td th:text="${job.getMachine().getType()}"></td>
+                        <td th:text="${job.isCompleted}"></td>
+                        <td th:text="${job.getNote()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="location.href='/add-new-job';" type="button">Új munka
+                </button>
             </div>
         </div>
+        <!--            <h5>More templates</h5>-->
+        <!--            <hr>-->
+        <!--            <div class="row">-->
+        <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
+        <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
+
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">-->
+        <!--                    <div class="card rounded-0 p-0 shadow-sm">-->
+
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <hr>
+
         <footer class="text-center">
             <div class="mb-2">
                 <small>

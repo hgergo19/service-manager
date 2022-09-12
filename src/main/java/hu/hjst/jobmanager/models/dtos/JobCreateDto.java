@@ -1,18 +1,20 @@
 package hu.hjst.jobmanager.models.dtos;
 
-import hu.hjst.jobmanager.models.entities.Machine;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Data
 public class JobCreateDto {
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private Boolean isCompleted;
     private Boolean isInvoiced;
     private String invoiceNumber;
     private String note;
-    private String machineNumber; // TODO : manually convert to Machine -> select from list in UI
+    private String serialNumber;
 }
