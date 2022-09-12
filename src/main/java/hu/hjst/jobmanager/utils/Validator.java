@@ -13,4 +13,10 @@ public class Validator {
             throw new IllegalArgumentException(message);
         }
     }
+
+    public static void validatePositiveNumber(Number n, String message) {
+        if (n.longValue() <= 0) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }
