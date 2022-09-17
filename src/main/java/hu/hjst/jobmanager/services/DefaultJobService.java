@@ -99,7 +99,7 @@ public class DefaultJobService implements JobService {
     }
 
     @Override
-    public List<JobDto> findJobsByCustomers() {
+    public List<JobDto> findJobsByCustomer(String customerName) {
         //TODO : IMPLEMENTATION
         return null;
     }
