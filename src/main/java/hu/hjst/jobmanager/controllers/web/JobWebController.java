@@ -10,19 +10,16 @@ import hu.hjst.jobmanager.services.MachineService;
 import hu.hjst.jobmanager.utils.Validator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 public class JobWebController {
 
-    private JobService service;
-    private CustomerService customerService;
-    private MachineService machineService;
+    private final JobService service;
+    private final CustomerService customerService;
+    private final MachineService machineService;
 
     public JobWebController(JobService service,
                             CustomerService customerService,
@@ -90,5 +87,13 @@ public class JobWebController {
         model.addAttribute("customer", machine.getCustomer());
 
         return "job-details";
+    }
+
+    @GetMapping("/jobs-by-machine-number") //TODO ! query paramok összefűzése a statusszal !!!
+    public String jobsBySerialNumber(Model model, @RequestParam(name = "serial") String serial) {
+        Validator.validate(serial, "Serial number is not valid! " + serial);
+        List<JobDto> jobs = service.findJobsByMachineNumber(serial);
+        model.addAttribute("jobs", jobs);
+        return "jobs-home";
     }
 }
