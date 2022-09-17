@@ -31,7 +31,6 @@ public class DefaultJobService implements JobService {
 
     public DefaultJobService(JobRepository repository, MachineRepository machineRepository) {
         this.repository = repository;
-
         this.machineRepository = machineRepository;
     }
 
@@ -82,23 +81,21 @@ public class DefaultJobService implements JobService {
 
     @Override
     public List<JobDto> findAllJobs(String status) {
-
-        Status s = Status.valueOf(status);
-        Validator.validate(s, "Invalid status input!");
-
+        Status s = Status.fromString(status);
         List<Job> allJobs = repository.findByStatus(s);
-        List<JobDto> response = new ArrayList<>();
-
-        for (Job job : allJobs) {
-            response.add(mapper.map(job, JobDto.class));
-        }
-        return response;
+        return entityWrapper(allJobs);
     }
 
     @Override
-    public List<JobDto> findJobsByMachineNumber() {
-        //TODO : IMPLEMENTATION
-        return null;
+    public List<JobDto> findJobsByMachineNumber(String serialNumber) {
+        Validator.validate(serialNumber, "Serial number must be filled!");
+
+        Optional<Machine> machineOptional = machineRepository.findById(serialNumber);
+        Machine machine = machineOptional.orElseThrow(()
+                -> new IllegalArgumentException("No machine  was fount with serial number :" + serialNumber));
+        List<Job> jobsByMachine = repository.findByMachine(machine);
+
+        return entityWrapper(jobsByMachine);
     }
 
     @Override
@@ -107,17 +104,13 @@ public class DefaultJobService implements JobService {
         return null;
     }
 
-    //TODO : find all jobs --> with argument (isActive set to default yes)
     @Override
     public List<JobDto> findActiveJobs() {
         List<Job> allActive = repository.findAllActive();
-        List<JobDto> response = new ArrayList<>();
-        for (Job job : allActive) {
-            response.add(mapper.map(job, JobDto.class));
-        }
-        return response;
+        return entityWrapper(allActive);
     }
 
+    //TODO cascade ?
     @Override
     public void deleteJobById(Long jobId) {
         //TODO : IMPLEMENTATION
@@ -133,5 +126,13 @@ public class DefaultJobService implements JobService {
         Optional<Machine> byId = machineRepository.findById(machineNumber);
         m = byId.orElseThrow(IllegalArgumentException::new);
         job.setMachine(m);
+    }
+
+    private List<JobDto> entityWrapper(List<Job> jobs) {
+        List<JobDto> response = new ArrayList<>();
+        for (Job job : jobs) {
+            response.add(mapper.map(job, JobDto.class));
+        }
+        return response;
     }
 }
