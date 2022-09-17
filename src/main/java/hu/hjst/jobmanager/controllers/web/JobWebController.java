@@ -37,21 +37,12 @@ public class JobWebController {
     public String listJobs(@PathVariable(required = false) String status, Model model) {
         List<JobDto> activeJobs;
 
-        switch (status) {
-            case "all":
-                activeJobs = service.findAllJobs();
-                model.addAttribute("jobs", activeJobs);
-                break;
-            case "active":
-                activeJobs = service.findActiveJobs();
-                model.addAttribute("jobs", activeJobs);
-                break;
-            case "invoiced":
-                activeJobs = service.findActiveJobs();
-                model.addAttribute("jobs", activeJobs);
-                break;
+        if (status == null || status.isEmpty()) {
+            activeJobs = service.findActiveJobs();
+        } else {
+            activeJobs = service.findAllJobs(status);
         }
-
+        model.addAttribute("jobs", activeJobs);
 
         return "jobs-home";
     }

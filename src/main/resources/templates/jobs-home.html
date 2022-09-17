@@ -18,13 +18,12 @@
 
                 <select id="dynamic_select">
                     <option value="" selected>Munka Státusz</option>
-                    <option value="/jobs-home/active">Folyamatban</option>
-                    <option value="/jobs-home/all">Összes</option>
-                    <option value="/jobs-home/invoiced">Számlázott</option>
+                    <option value="/jobs-home/IN_PROGRESS">Folyamatban</option>
+                    <option value="/jobs-home/INVOICE_ABLE">Számlázható</option>
+                    <option value="/jobs-home/INVOICED">Számlázott</option>
+                    <option value="/jobs-home/CLOSED">Lezárva</option>
+                    <option value="/jobs-home">Összes</option>
                 </select>
-
-
-
 
 
                 <div th:if="${jobs==null or jobs.isEmpty}">Nincsenek aktív munkák.</div>
@@ -54,7 +53,7 @@
                         <td th:text="${job.getStartDate()}"></td>
                         <td th:text="${job.getMachine().getSerialNumber()}"></td>
                         <td th:text="${job.getMachine().getType()}"></td>
-                        <td th:text="${job.isCompleted}"></td>
+                        <td th:text="${job.status.getText()}"></td>
                         <td th:text="${job.getNote()}"></td>
                     </tr>
                     </tbody>
@@ -127,6 +126,7 @@
           return false;
       });
     });
+
 </script>
 </body>
 
