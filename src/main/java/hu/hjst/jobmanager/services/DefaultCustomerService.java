@@ -41,7 +41,8 @@ public class DefaultCustomerService implements CustomerService {
     @Override
     public CustomerResponseDto findCustomerById(Long id) {
         Optional<Customer> byId = repository.findById(id);
-        return byId.map(customer -> modelMapper.map(customer, CustomerResponseDto.class)).orElseThrow(() -> new IllegalArgumentException("Customer with ID : " +id +" not exists!"));
+        return byId.map(customer -> modelMapper.map(customer, CustomerResponseDto.class))
+                .orElseThrow(() -> new IllegalArgumentException("Customer with ID : " +id +" not exists!"));
     }
 
     @Override
@@ -71,4 +72,6 @@ public class DefaultCustomerService implements CustomerService {
     public void modifyCustomerById(Long id) {
         // TODO : IMPL
     }
+
+
 }
