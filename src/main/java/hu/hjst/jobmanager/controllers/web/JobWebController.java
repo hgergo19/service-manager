@@ -2,6 +2,7 @@ package hu.hjst.jobmanager.controllers.web;
 
 import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
+import hu.hjst.jobmanager.models.dtos.MachineDto;
 import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.services.CustomerService;
 import hu.hjst.jobmanager.services.JobService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -31,10 +33,26 @@ public class JobWebController {
         this.machineService = machineService;
     }
 
-    @GetMapping("/jobs-home")
-    public String getAddNewJob(Model model) {
-        List<JobDto> activeJobs = service.findActiveJobs();
-        model.addAttribute("jobs", activeJobs);
+    @RequestMapping({"/jobs-home", "/jobs-home/{status}"})
+    public String listJobs(@PathVariable(required = false) String status, Model model) {
+        List<JobDto> activeJobs;
+
+        switch (status) {
+            case "all":
+                activeJobs = service.findAllJobs();
+                model.addAttribute("jobs", activeJobs);
+                break;
+            case "active":
+                activeJobs = service.findActiveJobs();
+                model.addAttribute("jobs", activeJobs);
+                break;
+            case "invoiced":
+                activeJobs = service.findActiveJobs();
+                model.addAttribute("jobs", activeJobs);
+                break;
+        }
+
+
         return "jobs-home";
     }
 
@@ -61,15 +79,25 @@ public class JobWebController {
     @PostMapping("/add-new-job")
     public String addNewJob(JobCreateDto dto) {
         Validator.validate(dto, "Body cannot be null!");
-        System.out.println(dto);
         service.newJob(dto);
         return "redirect:jobs-home";
     }
 
+    //Returns a form, where job details can be updated and service reports can be added.
     @GetMapping("/job-details/{id}")
-    public String getJobDetails(Model model, @PathVariable Long id){
+    public String getJobDetails(Model model, @PathVariable Long id) {
+        Validator.validate(id, "Id must not be null!");
+        Validator.validatePositiveNumber(id, "Id must be positive!");
 
-        return null;
+        JobDto jobByJobId = service.findJobByJobId(id);
+        String machineNumber = jobByJobId.getMachine().getSerialNumber();
+        MachineDto machine = machineService.findMachinesBySerialNumber(machineNumber);
+        System.out.println();
+        //TODO entity exposed ?!
+
+        model.addAttribute("job", jobByJobId);
+        model.addAttribute("customer", machine.getCustomer());
+
+        return "job-details";
     }
-
 }
