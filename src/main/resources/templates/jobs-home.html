@@ -25,6 +25,11 @@
                     <option value="/jobs-home">Összes</option>
                 </select>
 
+                <form action="/jobs-by-machine-number">
+                    <input type="text" name="serial"e>
+                    <input type="submit">
+                </form>
+
 
                 <div th:if="${jobs==null or jobs.isEmpty}">Nincsenek aktív munkák.</div>
                 <table class="table table-striped">
