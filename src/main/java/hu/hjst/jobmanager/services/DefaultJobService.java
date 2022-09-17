@@ -6,6 +6,7 @@ import hu.hjst.jobmanager.models.entities.Job;
 import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.repositories.JobRepository;
 import hu.hjst.jobmanager.repositories.MachineRepository;
+import hu.hjst.jobmanager.utils.Validator;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -70,14 +71,21 @@ public class DefaultJobService implements JobService {
 
     @Override
     public JobDto findJobByJobId(Long jobId) {
-        //TODO : IMPLEMENTATION
-        return null;
+        Validator.validate(jobId, "Id must not be null!");
+        Optional<Job> jobResult = repository.findById(jobId);
+
+        return jobResult.map(j -> mapper.map(j, JobDto.class))
+                .orElseThrow(() -> new IllegalArgumentException("Job with ID : " + jobId + " not exists!"));
     }
 
     @Override
     public List<JobDto> findAllJobs() {
-        //TODO : IMPLEMENTATION
-        return null;
+        List<Job> allJobs = repository.findAll();
+        List<JobDto> response = new ArrayList<>();
+        for (Job job : allJobs) {
+            response.add(mapper.map(job, JobDto.class));
+        }
+        return response;
     }
 
     @Override
@@ -92,6 +100,7 @@ public class DefaultJobService implements JobService {
         return null;
     }
 
+    //TODO : find all jobs --> with argument (isActive set to default yes)
     @Override
     public List<JobDto> findActiveJobs() {
         List<Job> allActive = repository.findAllActive();
