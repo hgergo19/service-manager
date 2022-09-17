@@ -6,9 +6,9 @@ public enum Status {
     INVOICED("Számlázva"),
     CLOSED("Lezárva");
 
-    private String text;
+    private final String text;
 
-    Status (String text){
+    Status(String text) {
         this.text = text;
     }
 
@@ -17,12 +17,13 @@ public enum Status {
     }
 
     public static Status fromString(String text) {
-        for (Status s : Status.values()) {
-            if (s.text.equalsIgnoreCase(text)) {
-                return s;
-            }
+        Status s;
+        try {
+            s = Status.valueOf(text);
+            return s;
+        } catch (IllegalArgumentException ex) {
+            throw new IllegalArgumentException("Invalid Status!");
         }
-        return null;
     }
 
 }
