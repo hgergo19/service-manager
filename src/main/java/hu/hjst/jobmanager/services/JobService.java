@@ -13,7 +13,7 @@ public interface JobService {
 
     List<JobDto> findAllJobs(String status);
 
-    List<JobDto> findJobsByMachineNumber();
+    List<JobDto> findJobsByMachineNumber(String serialNumber);
 
     List<JobDto> findJobsByCustomers();
 
