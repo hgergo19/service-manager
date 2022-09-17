@@ -15,7 +15,7 @@ public interface JobService {
 
     List<JobDto> findJobsByMachineNumber(String serialNumber);
 
-    List<JobDto> findJobsByCustomers();
+    List<JobDto> findJobsByCustomer(String customerName);
 
     List<JobDto> findActiveJobs();
 
