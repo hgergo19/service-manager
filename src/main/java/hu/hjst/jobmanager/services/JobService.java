@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface JobService {
 
-    JobDto newJob (JobCreateDto dto);
+    JobDto newJob(JobCreateDto dto);
 
     JobDto findJobByJobId(Long jobId);
 
-    List<JobDto> findAllJobs();
+    List<JobDto> findAllJobs(String status);
 
     List<JobDto> findJobsByMachineNumber();
 
