@@ -81,7 +81,7 @@ public class JobWebController {
         String machineNumber = jobByJobId.getMachine().getSerialNumber();
         MachineDto machine = machineService.findMachinesBySerialNumber(machineNumber);
         System.out.println();
-        //TODO entity exposed ?!
+        // TODO:  entity exposed ?!
 
         model.addAttribute("job", jobByJobId);
         model.addAttribute("customer", machine.getCustomer());

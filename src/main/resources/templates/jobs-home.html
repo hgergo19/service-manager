@@ -16,19 +16,24 @@
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-10 col-sm-8">
 
-                <select id="dynamic_select">
-                    <option value="" selected>Munka Státusz</option>
-                    <option value="/jobs-home/IN_PROGRESS">Folyamatban</option>
-                    <option value="/jobs-home/INVOICE_ABLE">Számlázható</option>
-                    <option value="/jobs-home/INVOICED">Számlázott</option>
-                    <option value="/jobs-home/CLOSED">Lezárva</option>
-                    <option value="/jobs-home">Összes</option>
-                </select>
-
-                <form action="/jobs-by-machine-number">
-                    <input type="text" name="serial"e>
-                    <input type="submit">
-                </form>
+                <div class="form-group col-3">
+                    <label for="dynamic_select"> Munkák statátusza </label>
+                    <select class="form-control" id="dynamic_select">
+                        <option value="" selected>Munka Státusz</option>
+                        <option value="/jobs-home/IN_PROGRESS">Folyamatban</option>
+                        <option value="/jobs-home/INVOICE_ABLE">Számlázható</option>
+                        <option value="/jobs-home/INVOICED">Számlázott</option>
+                        <option value="/jobs-home/CLOSED">Lezárva</option>
+                        <option value="/jobs-home">Összes</option>
+                    </select>
+                </div>
+                <div class="form-group col-6">
+                    <form action="/jobs-by-machine-number">
+                        <label for="serial"> Munkák keresése gépszám alapján </label>
+                        <input class="form-control" placeholder="2881-12587" type="text" name="serial" id="serial">
+                        <input type="submit">
+                    </form>
+                </div>
 
 
                 <div th:if="${jobs==null or jobs.isEmpty}">Nincsenek aktív munkák.</div>
@@ -131,6 +136,7 @@
           return false;
       });
     });
+
 
 </script>
 </body>
