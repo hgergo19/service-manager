@@ -16,6 +16,16 @@
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-10 col-sm-8">
 
+                <select id="dynamic_select">
+                    <option value="" selected>Munka Státusz</option>
+                    <option value="/jobs-home/active">Folyamatban</option>
+                    <option value="/jobs-home/all">Összes</option>
+                    <option value="/jobs-home/invoiced">Számlázott</option>
+                </select>
+
+
+
+
 
                 <div th:if="${jobs==null or jobs.isEmpty}">Nincsenek aktív munkák.</div>
                 <table class="table table-striped">
@@ -34,7 +44,7 @@
                     <tr th:each="job : ${jobs}">
                         <td>
                             <form>
-                                <a>
+                                <a th:href="@{/job-details/{id}(id=${job.getJobId()})}">
                                     <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i>
                                     </button>
                                 </a>
@@ -104,6 +114,20 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script th:replace="fragments/new-sidebarjs :: new-sidebarjs"></script>
+
+
+<script>
+    $(function(){
+      // bind change event to select
+      $('#dynamic_select').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+    });
+</script>
 </body>
 
 </html>
