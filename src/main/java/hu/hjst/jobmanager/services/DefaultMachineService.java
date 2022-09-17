@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static hu.hjst.jobmanager.utils.Validator.validate;
 
@@ -27,19 +28,23 @@ public class DefaultMachineService implements MachineService {
     @Override
     public MachineDto newMachine(MachineCreateDto dto) {
         //validation
-        validate(dto,"Machine object cannot be null!");
-        validate(dto.getSerialNumber(),"You must enter a valid machine number!");
-        validate(dto.getType(),"You must enter a valid machine type!");
-        validate(dto.getCustomer(),"You must enter a valid machine type!");
+        validate(dto, "Machine object cannot be null!");
+        validate(dto.getSerialNumber(), "You must enter a valid machine number!");
+        validate(dto.getType(), "You must enter a valid machine type!");
+        validate(dto.getCustomer(), "You must enter a valid machine type!");
 
-        return modelMapper.map(repository.save(modelMapper.map(dto, Machine.class)),MachineDto.class);
+        return modelMapper.map(repository.save(modelMapper.map(dto, Machine.class)), MachineDto.class);
     }
 
     @Override
     public MachineDto findMachinesBySerialNumber(String serialNumber) {
-        //TODO : IMPLEMENTATION
-        return null;
+        Validator.validate(serialNumber, "Serial number id cannot be null!!");
+        Optional<Machine> machine = repository.findById(serialNumber);
+        return machine.map(m -> modelMapper.map(m, MachineDto.class))
+                .orElseThrow(() -> new IllegalArgumentException("Machine with the serial number "
+                        + " " + serialNumber + " does not exists!"));
     }
+
 
     @Override
     public List<MachineDto> findMachinesByType(String type) {
@@ -49,9 +54,8 @@ public class DefaultMachineService implements MachineService {
 
     @Override
     public List<Machine> findMachinesByCustomer(Long customerId) {
-        Validator.validate(customerId,"Customer id cannot be null!!");
-        List<Machine> allByCustomerId = repository.findByCustomerId(customerId.intValue());
-        return allByCustomerId;
+        Validator.validate(customerId, "Customer id cannot be null!!");
+        return repository.findByCustomerId(customerId.intValue());
     }
 
     @Override
