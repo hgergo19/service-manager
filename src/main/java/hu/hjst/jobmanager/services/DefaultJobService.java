@@ -4,6 +4,7 @@ import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
 import hu.hjst.jobmanager.models.entities.Job;
 import hu.hjst.jobmanager.models.entities.Machine;
+import hu.hjst.jobmanager.models.enums.Status;
 import hu.hjst.jobmanager.repositories.JobRepository;
 import hu.hjst.jobmanager.repositories.MachineRepository;
 import hu.hjst.jobmanager.utils.Validator;
@@ -65,6 +66,7 @@ public class DefaultJobService implements JobService {
         }
         jobEntity.setIsCompleted(false);
         jobEntity.setIsInvoiced(false);
+        jobEntity.setStatus(Status.IN_PROGRESS);
         repository.save(jobEntity);
         return mapper.map(jobEntity, JobDto.class);
     }
@@ -79,9 +81,14 @@ public class DefaultJobService implements JobService {
     }
 
     @Override
-    public List<JobDto> findAllJobs() {
-        List<Job> allJobs = repository.findAll();
+    public List<JobDto> findAllJobs(String status) {
+
+        Status s = Status.valueOf(status);
+        Validator.validate(s, "Invalid status input!");
+
+        List<Job> allJobs = repository.findByStatus(s);
         List<JobDto> response = new ArrayList<>();
+
         for (Job job : allJobs) {
             response.add(mapper.map(job, JobDto.class));
         }
