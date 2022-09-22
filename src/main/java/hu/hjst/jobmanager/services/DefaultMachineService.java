@@ -8,6 +8,7 @@ import hu.hjst.jobmanager.utils.Validator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,8 +61,8 @@ public class DefaultMachineService implements MachineService {
 
     @Override
     public List<MachineDto> findAllMachines() {
-        //TODO : IMPLEMENTATION
-        return null;
+        List<Machine> machines = repository.findAll();
+        return entityWrapper(machines);
     }
 
     @Override
@@ -72,5 +73,13 @@ public class DefaultMachineService implements MachineService {
     @Override
     public void modifyMachineBySerialNumber(String serialNumber) {
         //TODO : IMPLEMENTATION
+    }
+
+    private List<MachineDto> entityWrapper(List<Machine> machines) {
+        List<MachineDto> response = new ArrayList<>();
+        for (Machine m : machines) {
+            response.add(modelMapper.map(m, MachineDto.class));
+        }
+        return response;
     }
 }

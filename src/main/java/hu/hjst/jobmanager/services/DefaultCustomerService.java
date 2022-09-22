@@ -47,8 +47,9 @@ public class DefaultCustomerService implements CustomerService {
 
     @Override
     public CustomerResponseDto findCustomerByName(String name) {
-        // TODO : IMPL
-        return null;
+        Validator.validate(name,"Invalid customer name --> DefaultCustomerService");
+        Customer customerByName = repository.findCustomerByCompanyName(name);
+        return modelMapper.map(customerByName, CustomerResponseDto.class);
     }
 
     @Override

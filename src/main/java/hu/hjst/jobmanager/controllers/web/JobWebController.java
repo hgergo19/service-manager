@@ -37,9 +37,11 @@ public class JobWebController {
         if (status == null || status.isEmpty()) {
             activeJobs = service.findActiveJobs();
         } else {
-            activeJobs = service.findAllJobs(status);
+            activeJobs = service.findJobsByStatus(status);
         }
         model.addAttribute("jobs", activeJobs);
+        model.addAttribute("customers", customerService.listCustomers());
+        model.addAttribute("machines", machineService.findAllMachines());
 
         return "jobs-home";
     }
@@ -93,7 +95,27 @@ public class JobWebController {
     public String jobsBySerialNumber(Model model, @RequestParam(name = "serial") String serial) {
         Validator.validate(serial, "Serial number is not valid! " + serial);
         List<JobDto> jobs = service.findJobsByMachineNumber(serial);
+
         model.addAttribute("jobs", jobs);
+        model.addAttribute("customers", customerService.listCustomers());
+        model.addAttribute("machines", machineService.findAllMachines());
         return "jobs-home";
+    }
+
+    @GetMapping("/jobs-by-customer")
+    public String jobsByCustomer(Model model, @RequestParam(name = "customer") String customer) {
+        System.out.println(customer);
+        Validator.validate(customer, "Serial number is not valid! " + customer);
+        List<JobDto> jobs = service.findJobsByCustomer(customer);
+
+        model.addAttribute("jobs", jobs);
+        model.addAttribute("customers", customerService.listCustomers());
+        model.addAttribute("machines", machineService.findAllMachines());
+        return "jobs-home";
+    }
+
+    @GetMapping("modify-job/{id}")
+    public String modifyJob() {
+        return "";
     }
 }

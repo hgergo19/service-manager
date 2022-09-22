@@ -1,5 +1,6 @@
 package hu.hjst.jobmanager.services;
 
+import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
 import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
 import hu.hjst.jobmanager.models.entities.Job;
@@ -13,10 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static hu.hjst.jobmanager.utils.Validator.validate;
@@ -27,11 +25,13 @@ public class DefaultJobService implements JobService {
 
     private final JobRepository repository;
     private final MachineRepository machineRepository;
+    private final CustomerService customerService;
     private final ModelMapper mapper = new ModelMapper();
 
-    public DefaultJobService(JobRepository repository, MachineRepository machineRepository) {
+    public DefaultJobService(JobRepository repository, MachineRepository machineRepository, CustomerService customerService) {
         this.repository = repository;
         this.machineRepository = machineRepository;
+        this.customerService = customerService;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DefaultJobService implements JobService {
     }
 
     @Override
-    public List<JobDto> findAllJobs(String status) {
+    public List<JobDto> findJobsByStatus(String status) {
         Status s = Status.fromString(status);
         List<Job> allJobs = repository.findByStatus(s);
         return entityWrapper(allJobs);
@@ -100,8 +100,21 @@ public class DefaultJobService implements JobService {
 
     @Override
     public List<JobDto> findJobsByCustomer(String customerName) {
-        //TODO : IMPLEMENTATION
-        return null;
+        Validator.validate(customerName, "Invalid customer name!");
+        CustomerResponseDto customer = customerService.findCustomerByName(customerName);
+        List<Machine> machines = customer.getMachines();
+        List<List<Job>> jobs = new ArrayList<>();
+
+        for (Machine machine : machines) {
+            List<Job> byMachine = repository.findByMachine(machine);
+            jobs.add(byMachine);
+        }
+
+        List<Job> collect = jobs.stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return entityWrapper(collect);
     }
 
     @Override
