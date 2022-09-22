@@ -11,7 +11,7 @@ public interface JobService {
 
     JobDto findJobByJobId(Long jobId);
 
-    List<JobDto> findAllJobs(String status);
+    List<JobDto> findJobsByStatus(String status);
 
     List<JobDto> findJobsByMachineNumber(String serialNumber);
 
