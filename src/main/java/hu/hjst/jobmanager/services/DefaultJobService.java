@@ -3,6 +3,7 @@ package hu.hjst.jobmanager.services;
 import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
 import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
+import hu.hjst.jobmanager.models.dtos.JobModifyDto;
 import hu.hjst.jobmanager.models.entities.Job;
 import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.models.enums.Status;
@@ -123,15 +124,53 @@ public class DefaultJobService implements JobService {
         return entityWrapper(allActive);
     }
 
-    //TODO cascade ?
+    //TODO cascade to service report?
     @Override
     public void deleteJobById(Long jobId) {
-        //TODO : IMPLEMENTATION
+        Validator.validate(jobId, "Job id must not be NULL!");
+        Job j = findAndGetById(jobId);
+        repository.delete(j);
     }
 
     @Override
-    public void modifyJobById(Long jobId) {
-        //TODO : IMPLEMENTATION
+    public void modifyJobById(Long jobId, JobModifyDto dto) {
+        Validator.validate(jobId, "Job id must not be NULL!");
+        Validator.validate(dto, "Data must not be NULL!");
+
+        Job j = findAndGetById(jobId);
+        LocalDate endDate = dto.getEndDate();
+        LocalDate startDate = j.getStartDate();
+        //TODO: test this !!
+        if (endDate != null) {
+            if (endDate.isAfter(startDate) || endDate.isEqual(startDate)) {
+                j.setEndDate(endDate);
+            }
+        }
+
+        String status = dto.getStatus();
+        Status s = Status.valueOf(status);
+        j.setStatus(s);
+
+        Boolean isCompleted = dto.getIsCompleted();
+        if (isCompleted != null) {
+            j.setIsCompleted(isCompleted);
+        }
+
+        Boolean isInvoiced = dto.getIsInvoiced();
+        if (isInvoiced != null) {
+            j.setIsInvoiced(isInvoiced);
+        }
+
+
+        String invoice = dto.getInvoiceNumber();
+        Validator.validate(invoice, "Invoice number cannot be null or empty!");
+        j.setInvoiceNumber(invoice);
+
+
+        String note = dto.getNote();
+        Validator.validate(note, "Note number cannot be null or empty!");
+        j.setNote(note);
+
     }
 
     private void setMachineOfJob(String machineNumber, Job job) {
@@ -147,5 +186,10 @@ public class DefaultJobService implements JobService {
             response.add(mapper.map(job, JobDto.class));
         }
         return response;
+    }
+
+    private Job findAndGetById(Long id) {
+        Optional<Job> job = repository.findById(id);
+        return job.orElseThrow(() -> new IllegalArgumentException("No job was found with id : " + id));
     }
 }

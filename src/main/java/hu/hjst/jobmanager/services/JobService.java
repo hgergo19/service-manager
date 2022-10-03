@@ -2,6 +2,7 @@ package hu.hjst.jobmanager.services;
 
 import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
+import hu.hjst.jobmanager.models.dtos.JobModifyDto;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ public interface JobService {
 
     void deleteJobById(Long jobId); //ONLY ADMIN
 
-    void modifyJobById(Long jobId); //ONLY ADMIN
+    void modifyJobById(Long jobId, JobModifyDto dto); //ONLY ADMIN
 }
