@@ -151,16 +151,13 @@ public class DefaultJobService implements JobService {
         Status s = Status.valueOf(status);
         j.setStatus(s);
 
-        Boolean isCompleted = dto.getIsCompleted();
-        if (isCompleted != null) {
-            j.setIsCompleted(isCompleted);
+        if (s.equals(Status.CLOSED)) {
+            j.setIsCompleted(true);
         }
-
-        Boolean isInvoiced = dto.getIsInvoiced();
-        if (isInvoiced != null) {
-            j.setIsInvoiced(isInvoiced);
+        if (s.equals(Status.INVOICED)) {
+            j.setIsInvoiced(true);
+            j.setIsCompleted(true);
         }
-
 
         String invoice = dto.getInvoiceNumber();
         Validator.validate(invoice, "Invoice number cannot be null or empty!");
