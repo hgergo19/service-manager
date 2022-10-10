@@ -8,9 +8,7 @@ import java.time.LocalDate;
 public class JobModifyDto {
 
     private LocalDate endDate;
-    private Boolean isCompleted;
     private String status;
-    private Boolean isInvoiced;
     private String invoiceNumber;
     private String note;
 }
