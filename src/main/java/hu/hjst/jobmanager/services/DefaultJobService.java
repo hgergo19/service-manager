@@ -1,17 +1,14 @@
 package hu.hjst.jobmanager.services;
 
-import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
-import hu.hjst.jobmanager.models.dtos.JobCreateDto;
-import hu.hjst.jobmanager.models.dtos.JobDto;
-import hu.hjst.jobmanager.models.dtos.JobModifyDto;
+import hu.hjst.jobmanager.models.dtos.*;
 import hu.hjst.jobmanager.models.entities.Job;
 import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.models.enums.Status;
 import hu.hjst.jobmanager.repositories.JobRepository;
-import hu.hjst.jobmanager.repositories.MachineRepository;
 import hu.hjst.jobmanager.utils.Validator;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,14 +22,17 @@ import static hu.hjst.jobmanager.utils.Validator.validate;
 public class DefaultJobService implements JobService {
 
     private final JobRepository repository;
-    private final MachineRepository machineRepository;
     private final CustomerService customerService;
+    private final MachineService machineService;
     private final ModelMapper mapper = new ModelMapper();
 
-    public DefaultJobService(JobRepository repository, MachineRepository machineRepository, CustomerService customerService) {
+    @Autowired
+    public DefaultJobService(JobRepository repository,
+                             CustomerService customerService,
+                             MachineService machineService) {
         this.repository = repository;
-        this.machineRepository = machineRepository;
         this.customerService = customerService;
+        this.machineService = machineService;
     }
 
     @Override
@@ -91,9 +91,8 @@ public class DefaultJobService implements JobService {
     public List<JobDto> findJobsByMachineNumber(String serialNumber) {
         Validator.validate(serialNumber, "Serial number must be filled!");
 
-        Optional<Machine> machineOptional = machineRepository.findById(serialNumber);
-        Machine machine = machineOptional.orElseThrow(()
-                -> new IllegalArgumentException("No machine  was fount with serial number :" + serialNumber));
+        MachineDto machineDto = machineService.findMachinesBySerialNumber(serialNumber);
+        Machine machine = mapper.map(machineDto, Machine.class);
         List<Job> jobsByMachine = repository.findByMachine(machine);
 
         return entityWrapper(jobsByMachine);
@@ -185,10 +184,9 @@ public class DefaultJobService implements JobService {
     }
 
     private void setMachineOfJob(String machineNumber, Job job) {
-        Machine m;
-        Optional<Machine> byId = machineRepository.findById(machineNumber);
-        m = byId.orElseThrow(IllegalArgumentException::new);
-        job.setMachine(m);
+        MachineDto machineDto = machineService.findMachinesBySerialNumber(machineNumber);
+        Machine machine = mapper.map(machineDto, Machine.class);
+        job.setMachine(machine);
     }
 
     private List<JobDto> entityWrapper(List<Job> jobs) {
