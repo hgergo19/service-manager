@@ -119,6 +119,12 @@ public class DefaultJobService implements JobService {
     }
 
     @Override
+    public List<JobDto> findAll() {
+        List<Job> all = repository.findAll();
+        return entityWrapper(all);
+    }
+
+    @Override
     public List<JobDto> findActiveJobs() {
         List<Job> allActive = repository.findAllActive();
         return entityWrapper(allActive);
@@ -137,37 +143,45 @@ public class DefaultJobService implements JobService {
         Validator.validate(jobId, "Job id must not be NULL!");
         Validator.validate(dto, "Data must not be NULL!");
 
-        Job j = findAndGetById(jobId);
+        Job currentJob = findAndGetById(jobId);
         LocalDate endDate = dto.getEndDate();
-        LocalDate startDate = j.getStartDate();
+        LocalDate startDate = currentJob.getStartDate();
         //TODO: test this !!
         if (endDate != null) {
             if (endDate.isAfter(startDate) || endDate.isEqual(startDate)) {
-                j.setEndDate(endDate);
+                currentJob.setEndDate(endDate);
             }
         }
 
         String status = dto.getStatus();
         Status s = Status.valueOf(status);
-        j.setStatus(s);
 
-        if (s.equals(Status.CLOSED)) {
-            j.setIsCompleted(true);
+        if (!currentJob.getStatus().equals(Status.INVOICED)) {
+            if (s.equals(Status.CLOSED)) {
+                currentJob.setIsCompleted(true);
+                currentJob.setStatus(Status.CLOSED);
+            }
+            if (s.equals(Status.INVOICED)) {
+                currentJob.setIsInvoiced(true);
+                currentJob.setIsCompleted(true);
+                currentJob.setStatus(Status.INVOICED);
+                String invoice = dto.getInvoiceNumber();
+                Validator.validate(invoice, "Invoice number cannot be null or empty!");
+                currentJob.setInvoiceNumber(invoice);
+            }
+            if (s.equals(Status.IN_PROGRESS)) {
+                currentJob.setStatus(Status.IN_PROGRESS);
+            }
+            if (s.equals(Status.INVOICE_ABLE)) {
+                currentJob.setStatus(Status.INVOICE_ABLE);
+            }
         }
-        if (s.equals(Status.INVOICED)) {
-            j.setIsInvoiced(true);
-            j.setIsCompleted(true);
-        }
-
-        String invoice = dto.getInvoiceNumber();
-        Validator.validate(invoice, "Invoice number cannot be null or empty!");
-        j.setInvoiceNumber(invoice);
-
 
         String note = dto.getNote();
-        Validator.validate(note, "Note number cannot be null or empty!");
-        j.setNote(note);
-
+        if (note != null) {
+            currentJob.setNote(note);
+        }
+        repository.save(currentJob);
     }
 
     private void setMachineOfJob(String machineNumber, Job job) {
