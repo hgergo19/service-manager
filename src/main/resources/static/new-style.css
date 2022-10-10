@@ -496,3 +496,14 @@ body {
     display: block;
     margin-top: 50px;
 }
+
+.card-body{
+    float: left;
+    margin-right: 50px;
+    height: 500px;
+    border-radius: 2em;
+    margin-top: 2em;
+    padding: 1.5em 0.5em 0.5em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
