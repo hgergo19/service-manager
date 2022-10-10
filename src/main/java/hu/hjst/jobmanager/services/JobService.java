@@ -18,6 +18,8 @@ public interface JobService {
 
     List<JobDto> findJobsByCustomer(String customerName);
 
+    List<JobDto> findAll();
+
     List<JobDto> findActiveJobs();
 
     void deleteJobById(Long jobId); //ONLY ADMIN
