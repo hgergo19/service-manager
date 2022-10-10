@@ -2,6 +2,7 @@ package hu.hjst.jobmanager.controllers.web;
 
 import hu.hjst.jobmanager.models.dtos.JobCreateDto;
 import hu.hjst.jobmanager.models.dtos.JobDto;
+import hu.hjst.jobmanager.models.dtos.JobModifyDto;
 import hu.hjst.jobmanager.models.dtos.MachineDto;
 import hu.hjst.jobmanager.models.entities.Machine;
 import hu.hjst.jobmanager.services.CustomerService;
@@ -30,19 +31,31 @@ public class JobWebController {
         this.machineService = machineService;
     }
 
-    @RequestMapping({"/jobs-home", "/jobs-home/{status}"})
+    @RequestMapping({"/jobs-home/{status}"})
     public String listJobs(@PathVariable(required = false) String status, Model model) {
         List<JobDto> activeJobs;
 
         if (status == null || status.isEmpty()) {
             activeJobs = service.findActiveJobs();
-        } else {
+        } else if (!status.equals("all")) {
             activeJobs = service.findJobsByStatus(status);
+        } else {
+            activeJobs = service.findAll();
         }
         model.addAttribute("jobs", activeJobs);
         model.addAttribute("customers", customerService.listCustomers());
         model.addAttribute("machines", machineService.findAllMachines());
 
+        return "jobs-home";
+    }
+
+    @GetMapping({"/jobs-home"})
+    public String listAllJobs(Model model) {
+        List<JobDto> activeJobs;
+        activeJobs = service.findActiveJobs();
+        model.addAttribute("jobs", activeJobs);
+        model.addAttribute("customers", customerService.listCustomers());
+        model.addAttribute("machines", machineService.findAllMachines());
         return "jobs-home";
     }
 
@@ -82,7 +95,6 @@ public class JobWebController {
         JobDto jobByJobId = service.findJobByJobId(id);
         String machineNumber = jobByJobId.getMachine().getSerialNumber();
         MachineDto machine = machineService.findMachinesBySerialNumber(machineNumber);
-        System.out.println();
         // TODO:  entity exposed ?!
 
         model.addAttribute("job", jobByJobId);
@@ -114,8 +126,12 @@ public class JobWebController {
         return "jobs-home";
     }
 
-    @GetMapping("modify-job/{id}")
-    public String modifyJob() {
-        return "";
+    @PostMapping("modify-job/{id}")
+    public String modifyJob(@PathVariable Long id, JobModifyDto dto) {
+        Validator.validate(id, "Id must not be null!");
+        Validator.validatePositiveNumber(id, "Id must be positive!");
+        Validator.validate(dto, "Dto must not be null!");
+        service.modifyJobById(id, dto);
+        return "redirect:/jobs-home";
     }
 }
