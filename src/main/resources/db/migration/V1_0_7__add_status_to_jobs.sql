@@ -1,0 +1,2 @@
+ALTER TABLE jobs
+    ADD COLUMN status VARCHAR(15);

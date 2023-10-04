@@ -52,6 +52,10 @@ public class Machine {
 
     @PrePersist
     private void setCreationTime() {
+        //TODO: check
+        if (lastUpdatedAt == null) {
+            lastUpdatedAt = LocalDateTime.now();
+        }
         createdAt = LocalDateTime.now();
     }
 

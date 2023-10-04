@@ -41,13 +41,15 @@ public class DefaultCustomerService implements CustomerService {
     @Override
     public CustomerResponseDto findCustomerById(Long id) {
         Optional<Customer> byId = repository.findById(id);
-        return byId.map(customer -> modelMapper.map(customer, CustomerResponseDto.class)).orElseThrow(() -> new IllegalArgumentException("Customer with ID : " +id +" not exists!"));
+        return byId.map(customer -> modelMapper.map(customer, CustomerResponseDto.class))
+                .orElseThrow(() -> new IllegalArgumentException("Customer with ID : " +id +" not exists!"));
     }
 
     @Override
     public CustomerResponseDto findCustomerByName(String name) {
-        // TODO : IMPL
-        return null;
+        Validator.validate(name,"Invalid customer name --> DefaultCustomerService");
+        Customer customerByName = repository.findCustomerByCompanyName(name);
+        return modelMapper.map(customerByName, CustomerResponseDto.class);
     }
 
     @Override
@@ -71,4 +73,6 @@ public class DefaultCustomerService implements CustomerService {
     public void modifyCustomerById(Long id) {
         // TODO : IMPL
     }
+
+
 }

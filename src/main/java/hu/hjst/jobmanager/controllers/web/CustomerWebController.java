@@ -3,6 +3,7 @@ package hu.hjst.jobmanager.controllers.web;
 import hu.hjst.jobmanager.models.dtos.CustomerCreateDto;
 import hu.hjst.jobmanager.models.dtos.CustomerResponseDto;
 import hu.hjst.jobmanager.services.CustomerService;
+import hu.hjst.jobmanager.utils.Validator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,31 +16,31 @@ public class CustomerWebController {
 
     private final CustomerService customerService;
 
-  public CustomerWebController(CustomerService customerService) {
-    this.customerService = customerService;
-  }
+    public CustomerWebController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
-  @GetMapping("/customer-home")
-  public String customerCreate() {
-    return "new-customer-home";
-  }
+    @GetMapping("/customer-home")
+    public String customerCreate() {
+        return "customer-home";
+    }
 
-  @PostMapping("/new-customer")
-  public String addCustomer(CustomerCreateDto dto) {
-    customerService.newCustomer(dto);
-    return "redirect:/customers";
-  }
+    @PostMapping("/new-customer")
+    public String addCustomer(CustomerCreateDto dto) {
+        customerService.newCustomer(dto);
+        return "redirect:/customers";
+    }
 
-  @GetMapping("/new-customer")
-  public String addCustomer() {
-    return "new-customer";
-  }
+    @GetMapping("/new-customer")
+    public String addCustomer() {
+        return "new-customer";
+    }
 
-  @GetMapping("/customers")
-  public String listCustomers(Model model) {
-    model.addAttribute("customers", customerService.listCustomers());
-    return "new-customers";
-  }
+    @GetMapping("/customers")
+    public String listCustomers(Model model) {
+        model.addAttribute("customers", customerService.listCustomers());
+        return "customers";
+    }
 
     @PostMapping("/deleteCustomerById")
     public String deleteCustomerById(@RequestParam("id") Long buyerId) {
@@ -48,11 +49,13 @@ public class CustomerWebController {
     }
 
     @GetMapping("/customer/{id}")
-    public String customerDetailsPage(Model model, @PathVariable Long id) {  //TODO id validity check
+    public String customerDetailsPage(Model model, @PathVariable Long id) {
+        Validator.validate(id, "Id has to be a valid number.");
+        Validator.validatePositiveNumber(id, "Id must be a positive number.");
         CustomerResponseDto customerById = customerService.findCustomerById(id);
-        model.addAttribute("customer",customerById);
-        model.addAttribute("machines",customerById.getMachines());
-      System.out.println(customerById.getMachines());
+        model.addAttribute("customer", customerById);
+        model.addAttribute("machines", customerById.getMachines());
+        System.out.println(customerById.getMachines());
         return "customer-details";
     }
 }

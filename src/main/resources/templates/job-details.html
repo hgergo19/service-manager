@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">>
+
+<head th:include="fragments/head :: headFragment">
+    <title id="pageTitle">Ügyfél részletek</title>
+</head>
+<body>
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <nav th:replace="fragments/new-sidebar :: new-sidebar">Empty</nav>
+    <!-- sidebar-wrapper  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <h2>Munka részletek</h2>
+            <hr>
+            <div style="display: block" class="row col-lg-12 col-md-10 col-sm-8">
+                <p th:text="'Munkaszám: '+${job.jobId}">Munkaszám: </p>
+                <p th:text="'Ügyfél: '+ ${customer.companyName}">Ügyfél:</p>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="card rounded-3 p-2 shadow-sm">
+                        <div class=" text-center">
+                            <h4 class="margin-15">Munka részletek módosítása</h4>
+                        </div>
+                        <div>
+                            <form action="/modify-job/?{job.jobId}" method="post"
+                                  th:action="@{/modify-job/{id}(id=${job.jobId})}">
+                                <div class="form-group col-auto margin-auto">
+
+                                    <div class="form-group col-12">
+                                        <label for="endDate">Vége dátum</label>
+                                        <input type="date" id="endDate" name="endDate" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="note">Megjegyzés</label>
+                                        <input type="text" id="note" name="note" class="form-control"
+                                               placeholder="Max 255 karakter">
+                                    </div>
+
+
+                                    <div class="form-group col-12">
+                                        <label for="status">Státusz </label>
+                                        <select class="form-control" name="status" id="status"
+                                                onchange="EnableDisableTextBox(this)">
+                                            <option th:each=" status : ${T(hu.hjst.jobmanager.models.enums.Status).values()}"
+                                                    th:value="${status}" th:text="${status.text}"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="note">Számlaszám</label>
+                                        <input type="text" id="invoiceNumber" name="invoiceNumber" class="form-control"
+                                               disabled="disabled"
+                                               placeholder="Számlaszám">
+                                    </div>
+
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Mentés</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="card rounded-0 p-0 shadow-sm">
+                        <h4>Munkához tartozó munkalapok</h4>
+                        <!--                        <ul class="list-group list-group-flush">-->
+                        <!--                            <li class="list-group-item"><small>Kapcsolattartó :</small> <span style="font-size: larger"-->
+                        <!--                                                                                              th:text="${customer.getContactPersonName()}"></span></li>-->
+                        <!--                            <li class="list-group-item">Elsődleges email : <span-->
+                        <!--                                    th:text="${customer.getPrimaryEmail()}"></span></li>-->
+                        <!--                            <li class="list-group-item">Másodlagos email : <span-->
+                        <!--                                    th:text="${customer.getSecondaryEmail()}"></span></li>-->
+                        <!--                            <li class="list-group-item">Cím : <span-->
+                        <!--                                    th:text="${customer.getAddress()}"></span></li>-->
+                        <!--                            <li class="list-group-item">Adószám : <span-->
+                        <!--                                    th:text="${customer.getVatNumber()}"></span></li>-->
+                        <!--                            <li class="list-group-item">Bankszámlaszám : <span-->
+                        <!--                                    th:text="${customer.getAccountNumber()}"></span></li>-->
+                        <!--                            <li class="list-group-item">Jegyzet : <span-->
+                        <!--                                    th:text="${customer.getNote()}"></span></li>-->
+                        <!--                        </ul>-->
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <footer class="text-center">
+                <div class="mb-2">
+                    <small>
+                        © 2020 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank"
+                                                                                               rel="noopener noreferrer"
+                                                                                               href="https://azouaoui.netlify.com">
+                        Mohamed Azouaoui
+                    </a>
+                    </small>
+                </div>
+                <div>
+                    <a href="https://github.com/azouaoui-med" target="_blank">
+                        <img alt="GitHub followers"
+                             src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social"/>
+                    </a>
+                    <a href="https://twitter.com/azouaoui_med" target="_blank">
+                        <img alt="Twitter Follow"
+                             src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social"/>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </main>
+    <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script th:replace="fragments/new-sidebarjs :: new-sidebarjs"></script>
+
+<script type="text/javascript">
+    function EnableDisableTextBox(status) {
+        var selectedValue = status.options[status.selectedIndex].value;
+        var invoiceNumber = document.getElementById("invoiceNumber");
+        invoiceNumber.disabled = selectedValue == "INVOICED" ? false : true;
+        if (!invoiceNumber.disabled) {
+            invoiceNumber.focus();
+        }
+    }
+
+
+
+
+
+
+</script>
+</body>
+
+</html>

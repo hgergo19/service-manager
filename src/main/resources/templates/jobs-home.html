@@ -16,6 +16,41 @@
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-10 col-sm-8">
 
+                <div class="form-group col-3">
+                    <label for="dynamic_select"> Munkák statátusza </label>
+                    <select class="form-control" id="dynamic_select">
+                        <option value="" selected>Munka Státusz</option>
+                        <option value="/jobs-home/IN_PROGRESS">Folyamatban</option>
+                        <option value="/jobs-home/INVOICE_ABLE">Számlázható</option>
+                        <option value="/jobs-home/INVOICED">Számlázott</option>
+                        <option value="/jobs-home/CLOSED">Lezárva</option>
+                        <option value="/jobs-home/all">Összes</option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <form action="/jobs-by-machine-number">
+                        <label for="serial"> Munkák keresése gépszám alapján </label>
+                        <select id="serial" name="serial" class="form-control">
+                            <option value="" selected>Válassz egyet</option>
+                            <option th:each="machine : ${machines}" th:value="${machine.serialNumber}"
+                                    th:text="${machine.serialNumber}"></option>
+                        </select>
+                        <input type="submit">
+                    </form>
+                </div>
+
+                <div class="form-group col-4">
+                    <form action="/jobs-by-customer/">
+                        <label for="serial"> Munkák keresése ügyfél alapján </label>
+                        <select id="customer" name="customer" class="form-control">
+                            <option value="" selected>Munkák keresése ügyfél alapján</option>
+                            <option th:each="customer : ${customers}" th:value="${customer.companyName}"
+                                    th:text="${customer.companyName}"></option>
+                        </select>
+                        <input type="submit">
+                    </form>
+                </div>
+
 
                 <div th:if="${jobs==null or jobs.isEmpty}">Nincsenek aktív munkák.</div>
                 <table class="table table-striped">
@@ -34,7 +69,7 @@
                     <tr th:each="job : ${jobs}">
                         <td>
                             <form>
-                                <a>
+                                <a th:href="@{/job-details/{id}(id=${job.getJobId()})}">
                                     <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i>
                                     </button>
                                 </a>
@@ -44,7 +79,7 @@
                         <td th:text="${job.getStartDate()}"></td>
                         <td th:text="${job.getMachine().getSerialNumber()}"></td>
                         <td th:text="${job.getMachine().getType()}"></td>
-                        <td th:text="${job.isCompleted}"></td>
+                        <td th:text="${job.status.getText()}"></td>
                         <td th:text="${job.getNote()}"></td>
                     </tr>
                     </tbody>
@@ -104,6 +139,27 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script th:replace="fragments/new-sidebarjs :: new-sidebarjs"></script>
+
+
+<script>
+    $(function(){
+      // bind change event to select
+      $('#dynamic_select').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+    });
+
+
+
+
+
+
+
+</script>
 </body>
 
 </html>

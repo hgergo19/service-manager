@@ -1,5 +1,6 @@
 package hu.hjst.jobmanager.models.entities;
 
+import hu.hjst.jobmanager.models.enums.Status;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -28,6 +29,10 @@ public class Job {
 
     @Column(name = "completed")
     private Boolean isCompleted;
+
+    @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 
     @Column(name = "invoiced")
     private Boolean isInvoiced;

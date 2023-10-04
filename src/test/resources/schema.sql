@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS jobs
     `invoiced`       BOOLEAN,
     `invoice_number` VARCHAR(20),
     `note`           VARCHAR(255),
-    `machine_serial_number`  VARCHAR(20)
+    `serial_number`  VARCHAR(20),
+    `status`  VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS machines
@@ -20,8 +21,9 @@ CREATE TABLE IF NOT EXISTS machines
     `nc_software_version`  VARCHAR(15),
     `plc_software_version` VARCHAR(15),
     `created_at`           DATETIME,
-    `last_updated_at`      DATETIME
+    `last_updated_at`      DATETIME,
+    `customer_id`          BIGINT
 );
 
 ALTER TABLE jobs
-    ADD CONSTRAINT machine_serial_number FOREIGN KEY (machine_serial_number) REFERENCES machines(serial_number) ;
+    ADD CONSTRAINT serial_number FOREIGN KEY (serial_number) REFERENCES machines(serial_number) ;
